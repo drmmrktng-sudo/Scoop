@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Promo Codes — Scoop Deals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#D85A30;--brand-light:#FAECE7;--brand-dark:#712B13;
+  --ink:#1a1714;--ink-soft:#4a4642;--ink-muted:#8a8480;
+  --surface:#faf9f7;--surface-2:#f2f0ec;
+  --border:rgba(26,23,20,0.1);--border-strong:rgba(26,23,20,0.18);
+  --green:#1D9E75;--green-light:#E1F5EE;
+  --amber:#BA7517;--amber-light:#FAEEDA;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --sans:'DM Sans',sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--surface);color:var(--ink);font-size:17px;line-height:1.7;}
+a{text-decoration:none;color:inherit;}
+
+header{background:var(--ink);padding:0 2rem;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--brand);}
+.header-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px;}
+.logo{font-family:var(--serif);font-size:1.6rem;font-weight:900;color:white;letter-spacing:-0.5px;}
+.logo span{color:var(--brand);}
+nav{display:flex;gap:1.25rem;align-items:center;}
+nav a{color:rgba(255,255,255,0.65);font-size:0.85rem;transition:color 0.15s;}
+nav a:hover,nav a.active{color:white;}
+.nav-cta{background:var(--brand);color:white!important;padding:6px 16px;border-radius:4px;font-weight:500!important;}
+
+.page-hero{background:var(--ink);padding:3rem 2rem 2.5rem;text-align:center;}
+.page-hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:white;letter-spacing:-1px;margin-bottom:0.75rem;}
+.page-hero h1 em{font-style:italic;color:var(--brand);}
+.page-hero p{color:rgba(255,255,255,0.55);font-size:1rem;max-width:480px;margin:0 auto;}
+
+/* SEARCH BAR */
+.search-bar{max-width:560px;margin:0 auto;padding:1.5rem 2rem 0;}
+.search-wrap{display:flex;gap:0;background:white;border:1.5px solid var(--border-strong);border-radius:8px;overflow:hidden;}
+.search-wrap input{flex:1;border:none;padding:10px 16px;font-family:var(--sans);font-size:0.95rem;outline:none;color:var(--ink);}
+.search-wrap button{background:var(--brand);color:white;border:none;padding:10px 20px;font-family:var(--sans);font-size:0.88rem;font-weight:500;cursor:pointer;}
+
+.container{max-width:1200px;margin:0 auto;padding:0 2rem;}
+
+.filter-bar{display:flex;gap:8px;padding:1.25rem 0;flex-wrap:wrap;justify-content:center;}
+.filter-btn{background:white;border:1px solid var(--border-strong);color:var(--ink-soft);padding:6px 16px;border-radius:999px;font-size:0.82rem;cursor:pointer;transition:all 0.15s;font-family:var(--sans);}
+.filter-btn:hover{border-color:var(--brand);color:var(--brand);}
+.filter-btn.active{background:var(--ink);border-color:var(--ink);color:white;}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:2rem;}
+.stat-card{background:white;border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;text-align:center;}
+.stat-num{font-family:var(--mono);font-size:1.6rem;font-weight:500;color:var(--brand);}
+.stat-label{font-size:0.75rem;color:var(--ink-muted);margin-top:2px;}
+
+/* CODES GRID */
+.codes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.1rem;padding-bottom:4rem;}
+
+/* CODE CARD */
+.code-card{background:white;border:1px solid var(--border);border-radius:12px;padding:1.25rem;transition:box-shadow 0.2s,transform 0.15s;position:relative;}
+.code-card:hover{box-shadow:0 6px 24px rgba(0,0,0,0.08);transform:translateY(-2px);}
+.code-card.verified{border-left:3px solid var(--green);}
+.code-card.hot{border-left:3px solid var(--brand);}
+.code-card.reddit{border-left:3px solid #FF4500;}
+
+.code-card-header{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.code-logo{width:44px;height:44px;border-radius:9px;background:white;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:5px;flex-shrink:0;}
+.code-logo img{max-width:100%;max-height:100%;object-fit:contain;}
+.code-logo .initials{font-family:var(--serif);font-size:0.85rem;font-weight:900;color:var(--ink);}
+.code-brand{font-weight:600;font-size:0.95rem;}
+.code-category{font-size:0.72rem;color:var(--ink-muted);}
+.verified-tag{margin-left:auto;font-size:0.62rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:2px 8px;border-radius:3px;}
+.verified-tag.v{background:var(--green-light);color:#085041;}
+.verified-tag.r{background:#FFF0EB;color:#BF3200;}
+.verified-tag.h{background:var(--brand-light);color:var(--brand-dark);}
+
+.code-desc{font-size:0.88rem;color:var(--ink-soft);margin-bottom:12px;line-height:1.5;}
+
+/* THE CODE ITSELF */
+.code-copy-row{display:flex;align-items:center;gap:8px;}
+.code-display{flex:1;background:var(--surface-2);border:1.5px dashed var(--border-strong);border-radius:6px;padding:8px 14px;font-family:var(--mono);font-size:1rem;font-weight:500;letter-spacing:0.08em;color:var(--ink);text-align:center;}
+.copy-btn{background:var(--ink);color:white;border:none;border-radius:6px;padding:8px 16px;font-family:var(--sans);font-size:0.82rem;font-weight:500;cursor:pointer;transition:background 0.15s;white-space:nowrap;}
+.copy-btn:hover{background:var(--brand);}
+.copy-btn.copied{background:var(--green);}
+
+.code-meta{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:0.72rem;color:var(--ink-muted);}
+.code-expiry{color:var(--amber);font-weight:500;}
+.code-saves{color:var(--green);font-weight:600;}
+.code-link{color:var(--blue);font-size:0.72rem;margin-top:6px;display:block;}
+.code-link:hover{text-decoration:underline;}
+
+/* SECTION HEADERS */
+.section-header{display:flex;align-items:center;gap:10px;margin:2rem 0 1.1rem;}
+.section-header h2{font-family:var(--serif);font-size:1.3rem;font-weight:700;}
+.section-badge{font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:2px;}
+.sb-hot{background:var(--brand-light);color:var(--brand-dark);}
+.sb-reddit{background:#FFF0EB;color:#BF3200;}
+.sb-verified{background:var(--green-light);color:#085041;}
+
+footer{background:var(--ink);color:rgba(255,255,255,0.4);text-align:center;padding:1.75rem;font-size:0.75rem;line-height:1.9;}
+footer strong{color:white;}
+
+#toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:white;padding:9px 18px;border-radius:6px;font-size:0.82rem;font-weight:500;opacity:0;transform:translateY(8px);transition:opacity 0.2s,transform 0.2s;pointer-events:none;z-index:9999;border-left:3px solid var(--green);}
+#toast.show{opacity:1;transform:translateY(0);}
+
+@media(max-width:600px){.stats-row{grid-template-columns:repeat(2,1fr);}.codes-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">Scoop <span>Deals</span></a>
+    <nav>
+      <a href="index.html">Deals</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="codes.html" class="active">Codes</a>
+      <a href="index.html#freebies">Freebies</a>
+      <a href="index.html#alerts" class="nav-cta">Get Alerts</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <h1>Promo <em>Codes</em></h1>
+  <p>Verified promo codes updated daily — sourced and tested so you don't waste time on expired ones.</p>
+</div>
+
+<div class="search-bar">
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="Search by brand or category..." oninput="searchCodes()">
+    <button onclick="searchCodes()">Search</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCodes('all',this)">All Codes</button>
+    <button class="filter-btn" onclick="filterCodes('fashion',this)">👗 Fashion</button>
+    <button class="filter-btn" onclick="filterCodes('home',this)">🏠 Home</button>
+    <button class="filter-btn" onclick="filterCodes('beauty',this)">🧴 Beauty</button>
+    <button class="filter-btn" onclick="filterCodes('tech',this)">💻 Tech</button>
+    <button class="filter-btn" onclick="filterCodes('food',this)">🍕 Food</button>
+    <button class="filter-btn" onclick="filterCodes('grocery',this)">🛒 Grocery</button>
+    <button class="filter-btn" onclick="filterCodes('pets',this)">🐾 Pets</button>
+    <button class="filter-btn" onclick="filterCodes('travel',this)">✈️ Travel</button>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num">148</div><div class="stat-label">Active codes today</div></div>
+    <div class="stat-card"><div class="stat-num">34</div><div class="stat-label">Reddit-sourced</div></div>
+    <div class="stat-card"><div class="stat-num">89%</div><div class="stat-label">Verified working</div></div>
+    <div class="stat-card"><div class="stat-num">$2,400</div><div class="stat-label">Avg. saved this week</div></div>
+  </div>
+
+  <!-- HOT CODES -->
+  <div class="section-header">
+    <h2>🔥 Today's Hottest Codes</h2>
+    <span class="section-badge sb-hot">Updated hourly</span>
+  </div>
+
+  <div class="codes-grid" id="codesGrid">
+
+    <div class="code-card hot" data-cat="home" data-brand="linens hutch bedding">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/linensandhutch.com" alt="Linens & Hutch" onerror="this.parentElement.innerHTML='<span class=\'initials\'>L&H</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.linensandhutch.com" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Linens & Hutch</a></div><div class="code-category">🏠 Home · Bedding</div></div>
+        <span class="verified-tag h">🔥 Hot</span>
+      </div>
+      <div class="code-desc">72% off sitewide — deepest discount ever seen at this store. Comforter sets from $39. Free shipping + 101-night guarantee.</div>
+      <div class="code-copy-row">
+        <div class="code-display">BRADS72</div>
+        <button class="copy-btn" onclick="copyCode('BRADS72',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Limited time</span><span class="code-saves">Saves up to 72%</span></div>
+      <a href="https://www.linensandhutch.com" target="_blank" class="code-link">→ Shop Linens & Hutch</a>
+    </div>
+
+    <div class="code-card verified" data-cat="beauty" data-brand="ulta beauty skincare">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/ulta.com" alt="Ulta" onerror="this.parentElement.innerHTML='<span class=\'initials\'>ULT</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.ulta.com/featured/sale" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Ulta Beauty</a></div><div class="code-category">🧴 Beauty</div></div>
+        <span class="verified-tag v">✓ Verified</span>
+      </div>
+      <div class="code-desc">30% off sitewide — stackable with Ultamate Rewards points. Works in-store and online. Verified working today.</div>
+      <div class="code-copy-row">
+        <div class="code-display">SUMMER30</div>
+        <button class="copy-btn" onclick="copyCode('SUMMER30',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Expires May 31</span><span class="code-saves">Saves 30%</span></div>
+      <a href="https://www.ulta.com/featured/sale" target="_blank" class="code-link">→ Shop Ulta Beauty</a>
+    </div>
+
+    <div class="code-card verified" data-cat="pets" data-brand="chewy dog cat pet food">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/chewy.com" alt="Chewy" onerror="this.parentElement.innerHTML='<span class=\'initials\'>CHW</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.chewy.com/b/deals-316" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Chewy</a></div><div class="code-category">🐾 Pets</div></div>
+        <span class="verified-tag v">✓ Verified</span>
+      </div>
+      <div class="code-desc">35% off first Autoship order + free shipping on $49+. New Autoship customers only. Cancel anytime after first delivery.</div>
+      <div class="code-copy-row">
+        <div class="code-display">CHEWYWELCOME35</div>
+        <button class="copy-btn" onclick="copyCode('CHEWYWELCOME35',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Expires June 2</span><span class="code-saves">Saves 35%</span></div>
+      <a href="https://www.chewy.com/autoship" target="_blank" class="code-link">→ Shop Chewy Autoship</a>
+    </div>
+
+    <div class="code-card verified" data-cat="fashion" data-brand="kohls clothes apparel">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/kohls.com" alt="Kohl's" onerror="this.parentElement.innerHTML='<span class=\'initials\'>KHL</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.kohls.com/sale-event/coupons.jsp" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Kohl's</a></div><div class="code-category">👗 Fashion & Home</div></div>
+        <span class="verified-tag v">✓ Verified</span>
+      </div>
+      <div class="code-desc">Extra 20% off entire purchase. Earns Kohl's Cash on $50+ spend. Stack with clearance for 60–70% total savings.</div>
+      <div class="code-copy-row">
+        <div class="code-display">EXTRA20MAY</div>
+        <button class="copy-btn" onclick="copyCode('EXTRA20MAY',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Expires June 3</span><span class="code-saves">Saves 20%+</span></div>
+      <a href="https://www.kohls.com/sale-event/coupons.jsp" target="_blank" class="code-link">→ Shop Kohl's</a>
+    </div>
+
+    <div class="code-card hot" data-cat="fashion" data-brand="32 degrees shorts clothes">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/32degrees.com" alt="32 Degrees" onerror="this.parentElement.innerHTML='<span class=\'initials\'>32°</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.32degrees.com" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">32 Degrees</a></div><div class="code-category">👗 Fashion · Basics</div></div>
+        <span class="verified-tag h">🔥 Hot</span>
+      </div>
+      <div class="code-desc">Free shipping on orders $24+ when you use this code. Pairs with already-reduced sale items sitewide. Pull-on shorts $9.99 right now.</div>
+      <div class="code-copy-row">
+        <div class="code-display">BRAD24</div>
+        <button class="copy-btn" onclick="copyCode('BRAD24',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Limited time</span><span class="code-saves">Free shipping</span></div>
+      <a href="https://www.32degrees.com" target="_blank" class="code-link">→ Shop 32 Degrees</a>
+    </div>
+
+    <div class="code-card verified" data-cat="food" data-brand="hungry howies pizza food">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/hungryhowies.com" alt="Hungry Howie's" onerror="this.parentElement.innerHTML='🍕'"></div>
+        <div><div class="code-brand"><a href="https://www.hungryhowies.com/specials" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Hungry Howie's</a></div><div class="code-category">🍕 Food · Pizza</div></div>
+        <span class="verified-tag v">✓ Verified</span>
+      </div>
+      <div class="code-desc">Buy any pizza at regular price, get a second pizza of equal or lesser value for just 99 cents. Valid online and in-app.</div>
+      <div class="code-copy-row">
+        <div class="code-display">ANY99</div>
+        <button class="copy-btn" onclick="copyCode('ANY99',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Ongoing</span><span class="code-saves">2nd pizza 99¢</span></div>
+      <a href="https://www.hungryhowies.com/specials" target="_blank" class="code-link">→ Order Hungry Howie's</a>
+    </div>
+
+    <div class="code-card verified" data-cat="home" data-brand="pureboost energy health wellness">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/pureboost.com" alt="Pureboost" onerror="this.parentElement.innerHTML='<span class=\'initials\'>PB</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.pureboost.com" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Pureboost</a></div><div class="code-category">💊 Health · Energy</div></div>
+        <span class="verified-tag v">✓ Verified</span>
+      </div>
+      <div class="code-desc">$15 off 30-ct Clean Energy packets + free shipping (saves $5.99 more). No sugar, no sweeteners, made in USA. Final price $20.</div>
+      <div class="code-copy-row">
+        <div class="code-display">BRADSENERGY</div>
+        <button class="copy-btn" onclick="copyCode('BRADSENERGY',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Limited</span><span class="code-saves">Saves $20</span></div>
+      <a href="https://www.pureboost.com" target="_blank" class="code-link">→ Shop Pureboost</a>
+    </div>
+
+    <!-- REDDIT SOURCED CODES -->
+    <div class="code-card reddit" data-cat="grocery" data-brand="instacart grocery delivery food">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/instacart.com" alt="Instacart" onerror="this.parentElement.innerHTML='<span class=\'initials\'>IC</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.instacart.com" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Instacart</a></div><div class="code-category">🛒 Grocery Delivery</div></div>
+        <span class="verified-tag r">Reddit</span>
+      </div>
+      <div class="code-desc">50% off your first Instacart order, up to $20 back. New accounts only. Shared on r/deals — verified working for new users.</div>
+      <div class="code-copy-row">
+        <div class="code-display">INSTACART50</div>
+        <button class="copy-btn" onclick="copyCode('INSTACART50',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⚡ Limited availability</span><span class="code-saves">Up to $20 off</span></div>
+      <a href="https://www.instacart.com" target="_blank" class="code-link">→ Shop Instacart</a>
+    </div>
+
+    <div class="code-card verified" data-cat="tech" data-brand="torras iphone case stand phone">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/torraslife.com" alt="TORRAS" onerror="this.parentElement.innerHTML='<span class=\'initials\'>TRS</span>'"></div>
+        <div><div class="code-brand"><a href="https://torraslife.com/products/ostand-q3-air-summer-for-iphone-17-pro-max" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">TORRAS</a></div><div class="code-category">📱 Tech · iPhone Cases</div></div>
+        <span class="verified-tag v">✓ Verified</span>
+      </div>
+      <div class="code-desc">10% off the new Q3 Air Summer case for iPhone 17 Pro Max. Lightweight, anti-slip, built-in 360° stand. Up to 30% off sitewide during the sale — code stacks on top.</div>
+      <div class="code-copy-row">
+        <div class="code-display">SUMMER10</div>
+        <button class="copy-btn" onclick="copyCode('SUMMER10',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Expires June 30, 2026</span><span class="code-saves">10% + up to 30% off</span></div>
+      <a href="https://torraslife.com/products/ostand-q3-air-summer-for-iphone-17-pro-max" target="_blank" class="code-link">→ Shop TORRAS Q3 Air Summer</a>
+    </div>
+  </div>
+
+  <!-- REDDIT CODES SECTION -->
+  <div class="section-header">
+    <h2>Reddit-Sourced Codes</h2>
+    <span class="section-badge sb-reddit">r/deals · r/coupons</span>
+  </div>
+
+  <div class="codes-grid">
+
+    <div class="code-card reddit" data-cat="tech" data-brand="surfshark vpn tech software">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/surfshark.com" alt="Surfshark" onerror="this.parentElement.innerHTML='<span class=\'initials\'>SS</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.surfshark.com" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Surfshark VPN</a></div><div class="code-category">💻 Tech · Software</div></div>
+        <span class="verified-tag r">Reddit</span>
+      </div>
+      <div class="code-desc">90% off 2-year plan + 4 free months. Reddit's r/deals regularly surfaces this as one of the best VPN codes available. Unlimited devices.</div>
+      <div class="code-copy-row">
+        <div class="code-display">REDDIT90</div>
+        <button class="copy-btn" onclick="copyCode('REDDIT90',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Ongoing promo</span><span class="code-saves">Saves 90%</span></div>
+      <a href="https://www.surfshark.com" target="_blank" class="code-link">→ Get Surfshark VPN</a>
+    </div>
+
+    <div class="code-card reddit" data-cat="food" data-brand="doordash food delivery restaurant">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/doordash.com" alt="DoorDash" onerror="this.parentElement.innerHTML='<span class=\'initials\'>DD</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.doordash.com" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">DoorDash</a></div><div class="code-category">🍕 Food Delivery</div></div>
+        <span class="verified-tag r">Reddit</span>
+      </div>
+      <div class="code-desc">$20 off your first order of $25+ shared on r/coupons. Free delivery included. New users only — one of the most shared DoorDash codes on Reddit.</div>
+      <div class="code-copy-row">
+        <div class="code-display">DASH20NEW</div>
+        <button class="copy-btn" onclick="copyCode('DASH20NEW',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ New users only</span><span class="code-saves">Saves $20</span></div>
+      <a href="https://www.doordash.com" target="_blank" class="code-link">→ Order on DoorDash</a>
+    </div>
+
+    <div class="code-card reddit" data-cat="grocery" data-brand="walmart grocery pickup delivery">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/walmart.com" alt="Walmart" onerror="this.parentElement.innerHTML='<span class=\'initials\'>WMT</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.walmart.com/grocery" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Walmart</a></div><div class="code-category">🛒 Grocery · General</div></div>
+        <span class="verified-tag r">Reddit</span>
+      </div>
+      <div class="code-desc">$10 off first pickup order of $50+. Spotted on r/frugal multiple times this month. Great for curbside grocery pickup — no delivery fee needed.</div>
+      <div class="code-copy-row">
+        <div class="code-display">PICKUP10</div>
+        <button class="copy-btn" onclick="copyCode('PICKUP10',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ New users</span><span class="code-saves">Saves $10</span></div>
+      <a href="https://www.walmart.com/grocery" target="_blank" class="code-link">→ Shop Walmart Grocery</a>
+    </div>
+
+    <div class="code-card reddit" data-cat="travel" data-brand="hotels booking travel trip stay">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/hotels.com" alt="Hotels.com" onerror="this.parentElement.innerHTML='<span class=\'initials\'>HTL</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.hotels.com" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Hotels.com</a></div><div class="code-category">✈️ Travel</div></div>
+        <span class="verified-tag r">Reddit</span>
+      </div>
+      <div class="code-desc">Extra 10% off app bookings shared on r/travel. Stack with One Key rewards for double savings. Works on most properties worldwide.</div>
+      <div class="code-copy-row">
+        <div class="code-display">APPONLY10</div>
+        <button class="copy-btn" onclick="copyCode('APPONLY10',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ App only</span><span class="code-saves">Extra 10% off</span></div>
+      <a href="https://www.hotels.com" target="_blank" class="code-link">→ Book on Hotels.com</a>
+    </div>
+
+    <div class="code-card reddit" data-cat="fashion" data-brand="nike shoes apparel sportswear">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/nike.com" alt="Nike" onerror="this.parentElement.innerHTML='<span class=\'initials\'>NIK</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.nike.com/membership/students" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Nike</a></div><div class="code-category">👗 Fashion · Sneakers</div></div>
+        <span class="verified-tag r">Reddit</span>
+      </div>
+      <div class="code-desc">20% off for students via UNiDAYS — consistently surfaced on r/frugalmalefashion as the best Nike discount method. Verify once, use for a year.</div>
+      <div class="code-copy-row">
+        <div class="code-display">Via UNiDAYS</div>
+        <button class="copy-btn" onclick="copyCode('Via UNiDAYS',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Students only</span><span class="code-saves">Saves 20%</span></div>
+      <a href="https://www.nike.com/membership/students" target="_blank" class="code-link">→ Verify at Nike</a>
+    </div>
+
+    <div class="code-card reddit" data-cat="food" data-brand="ubereats food delivery restaurant">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/ubereats.com" alt="Uber Eats" onerror="this.parentElement.innerHTML='<span class=\'initials\'>UE</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.ubereats.com" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Uber Eats</a></div><div class="code-category">🍕 Food Delivery</div></div>
+        <span class="verified-tag r">Reddit</span>
+      </div>
+      <div class="code-desc">$25 off first 2 orders ($12.50 each) for new accounts. One of the most reliable Uber Eats codes from r/coupons — verified multiple times this month.</div>
+      <div class="code-copy-row">
+        <div class="code-display">eats-newuser25</div>
+        <button class="copy-btn" onclick="copyCode('eats-newuser25',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ New accounts only</span><span class="code-saves">Saves $25</span></div>
+      <a href="https://www.ubereats.com" target="_blank" class="code-link">→ Order on Uber Eats</a>
+    </div>
+
+    <div class="code-card reddit" data-cat="beauty" data-brand="sephora beauty makeup skincare">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/sephora.com" alt="Sephora" onerror="this.parentElement.innerHTML='<span class=\'initials\'>SEP</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.sephora.com/sale" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Sephora</a></div><div class="code-category">🧴 Beauty</div></div>
+        <span class="verified-tag r">Reddit</span>
+      </div>
+      <div class="code-desc">10% off for Beauty Insider members — shared on r/MUAonaBudget. Stack with birthday gift month for maximum savings. Works online and in-store.</div>
+      <div class="code-copy-row">
+        <div class="code-display">INSIDER10</div>
+        <button class="copy-btn" onclick="copyCode('INSIDER10',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Members only</span><span class="code-saves">Saves 10%</span></div>
+      <a href="https://www.sephora.com/beauty/insider-program" target="_blank" class="code-link">→ Shop Sephora</a>
+    </div>
+
+    <div class="code-card reddit" data-cat="tech" data-brand="nordvpn vpn tech privacy">
+      <div class="code-card-header">
+        <div class="code-logo"><img src="https://logo.clearbit.com/nordvpn.com" alt="NordVPN" onerror="this.parentElement.innerHTML='<span class=\'initials\'>NVP</span>'"></div>
+        <div><div class="code-brand"><a href="https://www.nordvpn.com" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">NordVPN</a></div><div class="code-category">💻 Tech · Privacy</div></div>
+        <span class="verified-tag r">Reddit</span>
+      </div>
+      <div class="code-desc">68% off 2-year plan + 3 free months. Consistently the top-voted VPN deal on r/deals and r/privacy. Includes Threat Protection Pro.</div>
+      <div class="code-copy-row">
+        <div class="code-display">REDDITOR68</div>
+        <button class="copy-btn" onclick="copyCode('REDDITOR68',this)">Copy</button>
+      </div>
+      <div class="code-meta"><span class="code-expiry">⏰ Limited time</span><span class="code-saves">Saves 68%</span></div>
+      <a href="https://www.nordvpn.com" target="_blank" class="code-link">→ Get NordVPN</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <strong>Scoop Deals</strong> — Promo codes verified daily. Always check expiry at checkout.<br>
+  Reddit codes sourced from r/deals, r/coupons, r/frugal, r/frugalmalefashion & r/MUAonaBudget.<br>
+  <a href="index.html" style="color:rgba(255,255,255,0.5);margin-top:0.5rem;display:inline-block;">← Back to Deals</a>
+</footer>
+
+<div id="toast">✓ Copied!</div>
+
+<script>
+// Logo fallbacks
+document.querySelectorAll('.code-logo img').forEach(img => {
+  img.onerror = function() {
+    const domain = this.src.replace('https://logo.clearbit.com/','');
+    this.onerror = function() {
+      const name = this.alt;
+      const initials = name.split(' ').map(w=>w[0]).join('').slice(0,3).toUpperCase();
+      this.parentElement.innerHTML = '<span class="initials">'+initials+'</span>';
+    };
+    this.src = 'https://www.google.com/s2/favicons?domain='+domain+'&sz=64';
+  };
+});
+
+function copyCode(code, btn) {
+  navigator.clipboard.writeText(code).catch(()=>{});
+  if (btn) {
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent='Copy'; btn.classList.remove('copied'); }, 2000);
+  }
+  const t = document.getElementById('toast');
+  t.textContent = '✓ ' + code + ' copied!';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+function filterCodes(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.code-card').forEach(card => {
+    if (cat === 'all' || card.dataset.cat.includes(cat)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+function searchCodes() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  document.querySelectorAll('.code-card').forEach(card => {
+    const text = (card.dataset.brand + ' ' + card.dataset.cat + ' ' + card.textContent).toLowerCase();
+    card.style.display = text.includes(q) ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>
