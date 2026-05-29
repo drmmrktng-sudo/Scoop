@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Reviews — Scoop Deals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#D85A30;--brand-light:#FAECE7;--brand-dark:#712B13;
+  --ink:#1a1714;--ink-soft:#4a4642;--ink-muted:#8a8480;
+  --surface:#faf9f7;--surface-2:#f2f0ec;
+  --border:rgba(26,23,20,0.1);--border-strong:rgba(26,23,20,0.18);
+  --green:#1D9E75;--green-light:#E1F5EE;
+  --amber:#BA7517;--amber-light:#FAEEDA;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --sans:'DM Sans',sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--surface);color:var(--ink);font-size:17px;line-height:1.7;}
+a{text-decoration:none;color:inherit;}
+
+/* HEADER */
+header{background:var(--ink);padding:0 2rem;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--brand);}
+.header-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px;}
+.logo{font-family:var(--serif);font-size:1.6rem;font-weight:900;color:white;letter-spacing:-0.5px;}
+.logo span{color:var(--brand);}
+nav{display:flex;gap:1.25rem;align-items:center;}
+nav a{color:rgba(255,255,255,0.65);font-size:0.85rem;transition:color 0.15s;}
+nav a:hover,nav a.active{color:white;}
+.nav-cta{background:var(--brand);color:white!important;padding:6px 16px;border-radius:4px;font-weight:500!important;}
+
+/* PAGE HERO */
+.page-hero{background:var(--ink);padding:3rem 2rem 2.5rem;text-align:center;}
+.page-hero h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.2rem);font-weight:900;color:white;letter-spacing:-1px;margin-bottom:0.75rem;}
+.page-hero h1 em{font-style:italic;color:var(--brand);}
+.page-hero p{color:rgba(255,255,255,0.55);font-size:1rem;max-width:480px;margin:0 auto;}
+
+/* CONTAINER */
+.container{max-width:1200px;margin:0 auto;padding:0 2rem;}
+
+/* FILTER BAR */
+.filter-bar{display:flex;gap:8px;padding:1.5rem 0 1.25rem;flex-wrap:wrap;justify-content:center;}
+.filter-btn{background:white;border:1px solid var(--border-strong);color:var(--ink-soft);padding:6px 16px;border-radius:999px;font-size:0.82rem;cursor:pointer;transition:all 0.15s;font-family:var(--sans);}
+.filter-btn:hover{border-color:var(--brand);color:var(--brand);}
+.filter-btn.active{background:var(--ink);border-color:var(--ink);color:white;}
+
+/* REVIEW GRID */
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;padding-bottom:4rem;}
+
+/* REVIEW CARD */
+.review-card{background:white;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:box-shadow 0.2s,transform 0.15s;}
+.review-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.09);transform:translateY(-2px);}
+.review-card.featured{grid-column:span 2;display:flex;}
+.review-card-top{padding:1.5rem 1.5rem 1rem;}
+.review-card.featured .review-card-top{flex:1;}
+.review-header{display:flex;align-items:center;gap:1rem;margin-bottom:1rem;}
+.brand-logo{width:60px;height:60px;border-radius:12px;background:white;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;flex-shrink:0;}
+.brand-logo img{max-width:100%;max-height:100%;object-fit:contain;}
+.brand-logo .initials{font-family:var(--serif);font-size:1rem;font-weight:900;color:var(--ink);}
+.brand-name{font-family:var(--serif);font-size:1.3rem;font-weight:700;margin-bottom:2px;}
+.stars{color:var(--amber);font-size:1rem;letter-spacing:1px;}
+.review-count{font-size:0.75rem;color:var(--ink-muted);margin-left:6px;}
+.verdict{display:inline-block;font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:3px;margin-top:4px;}
+.verdict.great{background:var(--green-light);color:#085041;}
+.verdict.good{background:var(--blue-light);color:#0C447C;}
+.verdict.ok{background:var(--amber-light);color:#633806;}
+.verdict.skip{background:#FCEBEB;color:#791F1F;}
+
+.review-body{font-size:0.9rem;line-height:1.7;color:var(--ink-soft);margin-bottom:1rem;}
+
+/* RATINGS */
+.rating-row{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+.rating-label{font-size:0.75rem;color:var(--ink-muted);width:120px;flex-shrink:0;}
+.rating-track{flex:1;background:var(--surface-2);border-radius:999px;height:5px;overflow:hidden;}
+.rating-fill{height:100%;border-radius:999px;background:var(--brand);}
+.rating-num{font-family:var(--mono);font-size:0.72rem;color:var(--brand);font-weight:500;width:30px;text-align:right;}
+
+/* PROS CONS */
+.pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1rem 0;}
+.pc-box{padding:0.8rem 1rem;border-radius:8px;}
+.pc-box.pros{background:var(--green-light);}
+.pc-box.cons{background:#FCEBEB;}
+.pc-box h4{font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
+.pc-box.pros h4{color:#085041;}.pc-box.cons h4{color:#791F1F;}
+.pc-box li{font-size:0.8rem;padding:2px 0;list-style:none;display:flex;gap:5px;}
+.pc-box.pros li{color:#0F6E56;}.pc-box.cons li{color:#A32D2D;}
+.pc-box.pros li::before{content:'✓';font-weight:700;}
+.pc-box.cons li::before{content:'✗';font-weight:700;}
+
+/* DEAL TIP BOX */
+.deal-tip{background:var(--surface-2);border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:0.75rem 1rem;font-size:0.83rem;color:var(--ink-soft);margin-top:0.75rem;}
+.deal-tip strong{color:var(--brand-dark);}
+
+/* SCORE BADGE */
+.score-badge{background:var(--ink);color:white;font-family:var(--mono);font-size:1.4rem;font-weight:500;width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+
+.category-tag{display:inline-block;background:var(--surface-2);color:var(--ink-muted);font-size:0.68rem;font-weight:500;padding:2px 8px;border-radius:3px;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.06em;}
+
+.shop-link{display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:var(--ink);color:white;font-size:0.82rem;font-weight:500;padding:8px 16px;border-radius:6px;text-decoration:none;transition:background 0.15s;}
+.shop-link:hover{background:var(--brand);}
+.shop-link::after{content:'→';}
+footer{background:var(--ink);color:rgba(255,255,255,0.4);text-align:center;padding:1.75rem;font-size:0.75rem;line-height:1.9;}
+footer strong{color:white;font-weight:500;}
+
+@media(max-width:800px){.review-card.featured{flex-direction:column;grid-column:span 1;}.reviews-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="index.html" class="logo">Scoop <span>Deals</span></a>
+    <nav>
+      <a href="index.html">Deals</a>
+      <a href="reviews.html" class="active">Reviews</a>
+      <a href="codes.html">Codes</a>
+      <a href="index.html#freebies">Freebies</a>
+      <a href="index.html#alerts" class="nav-cta">Get Alerts</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page-hero">
+  <h1>Brand <em>Reviews</em></h1>
+  <p>Honest, in-depth reviews of the best retailers — how their deals work, what to stack, and when to buy.</p>
+</div>
+
+<div class="container">
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterReviews('all',this)">All Brands</button>
+    <button class="filter-btn" onclick="filterReviews('fashion',this)">👗 Fashion</button>
+    <button class="filter-btn" onclick="filterReviews('home',this)">🏠 Home</button>
+    <button class="filter-btn" onclick="filterReviews('beauty',this)">🧴 Beauty</button>
+    <button class="filter-btn" onclick="filterReviews('tech',this)">💻 Tech</button>
+    <button class="filter-btn" onclick="filterReviews('grocery',this)">🛒 Grocery</button>
+    <button class="filter-btn" onclick="filterReviews('pets',this)">🐾 Pets</button>
+    <button class="filter-btn" onclick="filterReviews('kids',this)">🧸 Kids</button>
+  </div>
+
+  <div class="reviews-grid" id="reviewsGrid">
+
+    
+
+    <!-- TARGET -->
+    <div class="review-card" data-cat="home fashion grocery">
+      <div class="review-card-top">
+        <span class="category-tag">🛒 General Retail</span>
+        <div class="review-header">
+          <a href="https://www.target.com/c/target-circle-deals/-/N-4yte3" target="_blank" style="display:contents;"><div class="brand-logo"><img src="https://logo.clearbit.com/target.com" alt="Target" onerror="this.outerHTML='<span class=\'initials\'>TGT</span>'"></div></a>
+          <div>
+            <div class="brand-name"><a href="https://www.target.com/c/target-circle-deals/-/N-4yte3" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Target</a></div>
+            <div><span class="stars">★★★★☆</span><span class="review-count">8.4 / 10</span></div>
+            <span class="verdict great">Strong Pick</span>
+          </div>
+          <div class="score-badge" style="margin-left:auto;">8.4</div>
+        </div>
+        <a href="https://www.target.com/c/target-circle-deals/-/N-4yte3" target="_blank" class="shop-link">Shop Target Deals</a>
+        <p class="review-body">Target Circle deals stack beautifully with the RedCard (5% back on everything). Price matches Amazon, Walmart, and Best Buy within 14 days. Weekly Circle offers often hit 20–30% off specific categories.</p>
+        <div style="margin-bottom:1rem;">
+          <div class="rating-row"><span class="rating-label">Deal Frequency</span><div class="rating-track"><div class="rating-fill" style="width:85%"></div></div><span class="rating-num">8.5</span></div>
+          <div class="rating-row"><span class="rating-label">Stackability</span><div class="rating-track"><div class="rating-fill" style="width:88%"></div></div><span class="rating-num">8.8</span></div>
+          <div class="rating-row"><span class="rating-label">Return Policy</span><div class="rating-track"><div class="rating-fill" style="width:90%"></div></div><span class="rating-num">9.0</span></div>
+        </div>
+        <div class="pros-cons">
+          <div class="pc-box pros"><h4>Love it</h4><ul><li>Circle + RedCard = automatic 5% back</li><li>Price matches competitors</li><li>Same-day delivery available</li></ul></div>
+          <div class="pc-box cons"><h4>Watch out</h4><ul><li>Circle deals are personalized — vary by user</li><li>Clearance varies hugely by store</li></ul></div>
+        </div>
+        <div class="deal-tip"><strong>Best tip:</strong> RedCard + Circle is the best baseline setup. Check the Circle app weekly for personalized 20–30% off offers.</div>
+      </div>
+    </div>
+
+    
+
+    <!-- KOHLS -->
+    <div class="review-card" data-cat="fashion home">
+      <div class="review-card-top">
+        <span class="category-tag">👗 Fashion & Home</span>
+        <div class="review-header">
+          <a href="https://www.kohls.com/sale-event/coupons.jsp" target="_blank" style="display:contents;"><div class="brand-logo"><img src="https://logo.clearbit.com/kohls.com" alt="Kohl's" onerror="this.outerHTML='<span class=\'initials\'>KHL</span>'"></div></a>
+          <div>
+            <div class="brand-name"><a href="https://www.kohls.com/sale-event/coupons.jsp" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Kohl's</a></div>
+            <div><span class="stars">★★★★☆</span><span class="review-count">8.1 / 10</span></div>
+            <span class="verdict great">Strong Pick</span>
+          </div>
+          <div class="score-badge" style="margin-left:auto;">8.1</div>
+        </div>
+        <a href="https://www.kohls.com/sale-event/coupons.jsp" target="_blank" class="shop-link">Shop Kohl's Deals</a>
+        <p class="review-body">Kohl's is the ultimate stacking store. Email promo codes + Kohl's Cash + clearance prices = some of the deepest discounts in retail. Earn $10 Kohl's Cash for every $50 spent during Cash events, then spend it later.</p>
+        <div style="margin-bottom:0.75rem;">
+          <div class="rating-row"><span class="rating-label">Deal Stacking</span><div class="rating-track"><div class="rating-fill" style="width:95%"></div></div><span class="rating-num">9.5</span></div>
+          <div class="rating-row"><span class="rating-label">Code Frequency</span><div class="rating-track"><div class="rating-fill" style="width:88%"></div></div><span class="rating-num">8.8</span></div>
+          <div class="rating-row"><span class="rating-label">Return Policy</span><div class="rating-track"><div class="rating-fill" style="width:85%"></div></div><span class="rating-num">8.5</span></div>
+        </div>
+        <div class="deal-tip"><strong>Best tip:</strong> Never pay full price at Kohl's. Wait for 30% email code + Kohl's Cash event + clearance for 60–70% off total.</div>
+      </div>
+    </div>
+
+    <!-- ULTA -->
+    <div class="review-card" data-cat="beauty">
+      <div class="review-card-top">
+        <span class="category-tag">🧴 Beauty</span>
+        <div class="review-header">
+          <a href="https://www.ulta.com/featured/sale" target="_blank" style="display:contents;"><div class="brand-logo"><img src="https://logo.clearbit.com/ulta.com" alt="Ulta" onerror="this.outerHTML='<span class=\'initials\'>ULT</span>'"></div></a>
+          <div>
+            <div class="brand-name"><a href="https://www.ulta.com/featured/sale" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Ulta Beauty</a></div>
+            <div><span class="stars">★★★★☆</span><span class="review-count">8.0 / 10</span></div>
+            <span class="verdict great">Strong Pick</span>
+          </div>
+          <div class="score-badge" style="margin-left:auto;">8.0</div>
+        </div>
+        <a href="https://www.ulta.com/featured/sale" target="_blank" class="shop-link">Shop Ulta Sale</a>
+        <p class="review-body">Ulta's Ultamate Rewards program plus their 21 Days of Beauty sale (twice yearly) are the crown jewels. Points never expire, and Platinum/Diamond members get extra perks. Promo codes often stack on sale items.</p>
+        <div style="margin-bottom:0.75rem;">
+          <div class="rating-row"><span class="rating-label">Loyalty Program</span><div class="rating-track"><div class="rating-fill" style="width:88%"></div></div><span class="rating-num">8.8</span></div>
+          <div class="rating-row"><span class="rating-label">Sale Events</span><div class="rating-track"><div class="rating-fill" style="width:85%"></div></div><span class="rating-num">8.5</span></div>
+          <div class="rating-row"><span class="rating-label">Stackability</span><div class="rating-track"><div class="rating-fill" style="width:72%"></div></div><span class="rating-num">7.2</span></div>
+        </div>
+        <div class="deal-tip"><strong>Best tip:</strong> Stack 21 Days of Beauty 50% off deals with points redemption. Works in-store and online.</div>
+      </div>
+    </div>
+
+    <!-- SEPHORA -->
+    <div class="review-card" data-cat="beauty">
+      <div class="review-card-top">
+        <span class="category-tag">🧴 Beauty</span>
+        <div class="review-header">
+          <a href="https://www.sephora.com/sale" target="_blank" style="display:contents;"><div class="brand-logo"><img src="https://logo.clearbit.com/sephora.com" alt="Sephora" onerror="this.outerHTML='<span class=\'initials\'>SEP</span>'"></div></a>
+          <div>
+            <div class="brand-name"><a href="https://www.sephora.com/sale" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Sephora</a></div>
+            <div><span class="stars">★★★☆☆</span><span class="review-count">6.5 / 10</span></div>
+            <span class="verdict ok">Use Cautiously</span>
+          </div>
+          <div class="score-badge" style="margin-left:auto;">6.5</div>
+        </div>
+        <a href="https://www.sephora.com/sale" target="_blank" class="shop-link">Shop Sephora Sale</a>
+        <p class="review-body">Sephora deals are largely tier-dependent. Rouge members (spend $1,000+/yr) get the best access. Promo codes rarely stack. Best strategy: birthday gift + VIB Sale (20% off for Rouge, 15% VIB, 10% Insider) twice a year.</p>
+        <div class="deal-tip"><strong>Best tip:</strong> Sign up for Beauty Insider free tier for your birthday gift. VIB Sale in spring and fall is the best time to stock up.</div>
+      </div>
+    </div>
+
+    <!-- BATH & BODY WORKS -->
+    <div class="review-card" data-cat="beauty home">
+      <div class="review-card-top">
+        <span class="category-tag">🧴 Beauty & Home</span>
+        <div class="review-header">
+          <a href="https://www.bathandbodyworks.com/c/sale" target="_blank" style="display:contents;"><div class="brand-logo"><img src="https://logo.clearbit.com/bathandbodyworks.com" alt="Bath & Body Works" onerror="this.outerHTML='<span class=\'initials\'>B&B</span>'"></div></a>
+          <div>
+            <div class="brand-name"><a href="https://www.bathandbodyworks.com/c/sale" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Bath & Body Works</a></div>
+            <div><span class="stars">★★★★☆</span><span class="review-count">7.8 / 10</span></div>
+            <span class="verdict great">Strong Pick</span>
+          </div>
+          <div class="score-badge" style="margin-left:auto;">7.8</div>
+        </div>
+        <a href="https://www.bathandbodyworks.com/c/sale" target="_blank" class="shop-link">Shop Bath & Body Sale</a>
+        <p class="review-body">The Semi-Annual Sale (January and June) goes up to 75% off — genuinely one of the best sales in retail. In-store $10 off $30 coupons from the email list stack on sale items. Candles frequently hit $8–9 during sales (regularly $17.50).</p>
+        <div class="deal-tip"><strong>Best tip:</strong> Join the email list for $10 off $30 coupons. Semi-Annual Sale in June is the best time to stock up for the year.</div>
+      </div>
+    </div>
+
+    <!-- BEST BUY -->
+    <div class="review-card" data-cat="tech">
+      <div class="review-card-top">
+        <span class="category-tag">💻 Tech</span>
+        <div class="review-header">
+          <a href="https://www.bestbuy.com/site/misc/deal-of-the-day/pcmcat248000050016.c" target="_blank" style="display:contents;"><div class="brand-logo"><img src="https://logo.clearbit.com/bestbuy.com" alt="Best Buy" onerror="this.outerHTML='<span class=\'initials\'>BB</span>'"></div></a>
+          <div>
+            <div class="brand-name"><a href="https://www.bestbuy.com/site/misc/deal-of-the-day/pcmcat248000050016.c" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Best Buy</a></div>
+            <div><span class="stars">★★★★☆</span><span class="review-count">7.7 / 10</span></div>
+            <span class="verdict great">Strong Pick</span>
+          </div>
+          <div class="score-badge" style="margin-left:auto;">7.7</div>
+        </div>
+        <a href="https://www.bestbuy.com/site/misc/deal-of-the-day/pcmcat248000050016.c" target="_blank" class="shop-link">Shop Best Buy Deals</a>
+        <p class="review-body">Best Buy's My Best Buy Totaltech membership ($179.99/yr) includes free installation, extended warranties, and exclusive discounts. Open-box deals on bestbuy.com can be 20–40% off with full warranty. Price matches major retailers.</p>
+        <div class="deal-tip"><strong>Best tip:</strong> Check open-box deals first. Price match Amazon within 15 days of purchase — works in-store and online.</div>
+      </div>
+    </div>
+
+    <!-- CHEWY -->
+    <div class="review-card" data-cat="pets">
+      <div class="review-card-top">
+        <span class="category-tag">🐾 Pets</span>
+        <div class="review-header">
+          <a href="https://www.chewy.com/b/deals-316" target="_blank" style="display:contents;"><div class="brand-logo"><img src="https://logo.clearbit.com/chewy.com" alt="Chewy" onerror="this.outerHTML='<span class=\'initials\'>CHW</span>'"></div></a>
+          <div>
+            <div class="brand-name"><a href="https://www.chewy.com/b/deals-316" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Chewy</a></div>
+            <div><span class="stars">★★★★★</span><span class="review-count">8.8 / 10</span></div>
+            <span class="verdict great">Must Use</span>
+          </div>
+          <div class="score-badge" style="margin-left:auto;">8.8</div>
+        </div>
+        <a href="https://www.chewy.com/b/deals-316" target="_blank" class="shop-link">Shop Chewy Deals</a>
+        <p class="review-body">Best pet retailer for deals, full stop. Autoship saves 5–10% automatically on recurring orders, stackable with promo codes for new subscribers up to 35% off first order. Customer service is legendary — free replacements, no questions asked.</p>
+        <div class="pros-cons">
+          <div class="pc-box pros"><h4>Love it</h4><ul><li>Autoship + code stacking</li><li>Outstanding CS & free replacements</li><li>Free 1-2 day shipping on $49+</li></ul></div>
+          <div class="pc-box cons"><h4>Watch out</h4><ul><li>Best codes are new-customer only</li><li>Codes expire unannounced</li></ul></div>
+        </div>
+        <div class="deal-tip"><strong>Best tip:</strong> Autoship + new subscriber email code = 35–40% off first order. Cancel anytime after delivery.</div>
+      </div>
+    </div>
+
+    <!-- OLD NAVY -->
+    <div class="review-card" data-cat="fashion kids">
+      <div class="review-card-top">
+        <span class="category-tag">👗 Fashion</span>
+        <div class="review-header">
+          <a href="https://www.oldnavy.com/c/sale" target="_blank" style="display:contents;"><div class="brand-logo"><img src="https://logo.clearbit.com/oldnavy.com" alt="Old Navy" onerror="this.outerHTML='<span class=\'initials\'>ON</span>'"></div></a>
+          <div>
+            <div class="brand-name"><a href="https://www.oldnavy.com/c/sale" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Old Navy</a></div>
+            <div><span class="stars">★★★★☆</span><span class="review-count">7.6 / 10</span></div>
+            <span class="verdict great">Strong Pick</span>
+          </div>
+          <div class="score-badge" style="margin-left:auto;">7.6</div>
+        </div>
+        <a href="https://www.oldnavy.com/c/sale" target="_blank" class="shop-link">Shop Old Navy Sale</a>
+        <p class="review-body">Old Navy runs B1G1 and 50% off sitewide sales multiple times a month. Clearance included in most sale events. NavyCredit card gets 5 Super Cash per $1 spent. Best for kids and basics — quality vs price ratio is excellent.</p>
+        <div class="deal-tip"><strong>Best tip:</strong> Never buy at full price — a sitewide 40–50% off sale happens roughly every 2 weeks. Set a deal alert and wait.</div>
+      </div>
+    </div>
+
+    <!-- LULULEMON -->
+    <div class="review-card" data-cat="fashion">
+      <div class="review-card-top">
+        <span class="category-tag">👗 Fashion · Activewear</span>
+        <div class="review-header">
+          <a href="https://www.lululemon.com/en-us/c/sale" target="_blank" style="display:contents;"><div class="brand-logo"><img src="https://logo.clearbit.com/lululemon.com" alt="Lululemon" onerror="this.outerHTML='<span class=\'initials\'>LUL</span>'"></div></a>
+          <div>
+            <div class="brand-name"><a href="https://www.lululemon.com/en-us/c/sale" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Lululemon</a></div>
+            <div><span class="stars">★★★☆☆</span><span class="review-count">6.2 / 10</span></div>
+            <span class="verdict ok">Use Cautiously</span>
+          </div>
+          <div class="score-badge" style="margin-left:auto;">6.2</div>
+        </div>
+        <a href="https://www.lululemon.com/en-us/c/sale" target="_blank" class="shop-link">Shop We Made Too Much</a>
+        <p class="review-body">Lululemon rarely discounts. The We Made Too Much section is your best friend — select styles up to 50% off. Promo codes are almost non-existent. Best value: educator/military discount (15%) or gifting events.</p>
+        <div class="deal-tip"><strong>Best tip:</strong> Bookmark the "We Made Too Much" page and check weekly. Sizes go fast but quality is worth it at 40–50% off.</div>
+      </div>
+    </div>
+
+    <!-- WAYFAIR -->
+    <div class="review-card" data-cat="home">
+      <div class="review-card-top">
+        <span class="category-tag">🏠 Home</span>
+        <div class="review-header">
+          <a href="https://www.wayfair.com/daily-sales" target="_blank" style="display:contents;"><div class="brand-logo"><img src="https://logo.clearbit.com/wayfair.com" alt="Wayfair" onerror="this.outerHTML='<span class=\'initials\'>WAY</span>'"></div></a>
+          <div>
+            <div class="brand-name"><a href="https://www.wayfair.com/daily-sales" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1.5px solid var(--brand);">Wayfair</a></div>
+            <div><span class="stars">★★★☆☆</span><span class="review-count">6.8 / 10</span></div>
+            <span class="verdict ok">Use Cautiously</span>
+          </div>
+          <div class="score-badge" style="margin-left:auto;">6.8</div>
+        </div>
+        <a href="https://www.wayfair.com/daily-sales" target="_blank" class="shop-link">Shop Wayfair Daily Sales</a>
+        <p class="review-body">Wayfair's "sale" prices are often inflated — always compare with Amazon and Home Depot first. Their Way Day annual sale (April/May) is legitimate and deep. Email codes for new subscribers (10–15% off first order) are worth grabbing.</p>
+        <div class="deal-tip"><strong>Best tip:</strong> Way Day sale is the only time to trust Wayfair prices at face value. Use Google Shopping to compare before buying any other time.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <strong>Scoop Deals</strong> — Curated deals, promo codes & brand reviews updated daily.<br>
+  Reviews based on ongoing tracking. Not affiliated with any brand.<br>
+  <a href="index.html" style="color:rgba(255,255,255,0.5);margin-top:0.5rem;display:inline-block;">← Back to Deals</a>
+</footer>
+
+<script>
+// Logo fallback: Clearbit → Google favicons → initials
+document.querySelectorAll('.brand-logo img').forEach(img => {
+  img.onerror = function() {
+    const domain = this.src.replace('https://logo.clearbit.com/','');
+    this.onerror = function() {
+      const name = this.alt;
+      const initials = name.split(' ').map(w=>w[0]).join('').slice(0,3).toUpperCase();
+      this.parentElement.innerHTML = '<span class="initials">'+initials+'</span>';
+    };
+    this.src = 'https://www.google.com/s2/favicons?domain='+domain+'&sz=64';
+  };
+});
+
+function filterReviews(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.review-card').forEach(card => {
+    if (cat === 'all' || card.dataset.cat.includes(cat)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>
