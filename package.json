@@ -1,0 +1,9 @@
+{
+  "name": "scoop-deals",
+  "version": "1.0.0",
+  "description": "Daily deal updater for Scoop",
+  "type": "module",
+  "dependencies": {
+    "@octokit/rest": "^20.0.0"
+  }
+}
