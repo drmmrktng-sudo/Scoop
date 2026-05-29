@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scoop — Best Deals, Promo Codes & Brand Reviews</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand:#D85A30;--brand-light:#FAECE7;--brand-dark:#712B13;
+  --ink:#1a1714;--ink-soft:#4a4642;--ink-muted:#8a8480;
+  --surface:#faf9f7;--surface-2:#f2f0ec;
+  --border:rgba(26,23,20,0.1);--border-strong:rgba(26,23,20,0.18);
+  --green:#1D9E75;--green-light:#E1F5EE;
+  --amber:#BA7517;--amber-light:#FAEEDA;
+  --blue:#185FA5;--blue-light:#E6F1FB;
+  --sans:'DM Sans',sans-serif;--serif:'Playfair Display',Georgia,serif;--mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--surface);color:var(--ink);font-size:16px;line-height:1.6;}
+
+/* HEADER */
+header{background:var(--ink);padding:0 2rem;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--brand);}
+.header-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:58px;}
+.logo{font-family:var(--serif);font-size:1.6rem;font-weight:900;color:white;text-decoration:none;letter-spacing:-0.5px;}
+.logo span{color:var(--brand);}
+nav{display:flex;gap:1.25rem;align-items:center;}
+nav a{color:rgba(255,255,255,0.65);text-decoration:none;font-size:0.85rem;transition:color 0.15s;}
+nav a:hover{color:white;}
+.nav-cta{background:var(--brand);color:white!important;padding:6px 16px;border-radius:4px;font-weight:500!important;}
+.nav-cta:hover{background:var(--brand-dark)!important;}
+
+/* TICKER */
+.ticker-bar{background:var(--brand);overflow:hidden;padding:7px 0;}
+.ticker-inner{display:flex;gap:2.5rem;animation:ticker 50s linear infinite;white-space:nowrap;}
+.ticker-inner span{color:white;font-size:0.75rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;}
+.ticker-inner .dot{color:rgba(255,255,255,0.4);}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* HERO */
+.hero{background:var(--ink);padding:3.5rem 2rem 3rem;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 65% 40%,rgba(216,90,48,0.13) 0%,transparent 60%);pointer-events:none;}
+.hero-tag{display:inline-block;background:var(--brand);color:white;font-size:0.68rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;padding:4px 12px;border-radius:2px;margin-bottom:1.1rem;}
+.hero h1{font-family:var(--serif);font-size:clamp(2.2rem,5.5vw,4rem);font-weight:900;color:white;line-height:1.07;letter-spacing:-1px;max-width:700px;margin:0 auto 1.1rem;}
+.hero h1 em{font-style:italic;color:var(--brand);}
+.hero p{color:rgba(255,255,255,0.55);font-size:1rem;max-width:500px;margin:0 auto 1.75rem;font-weight:300;}
+.source-pills{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;}
+.source-pill{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.14);color:rgba(255,255,255,0.7);padding:5px 13px;border-radius:999px;font-size:0.75rem;display:flex;align-items:center;gap:6px;}
+.source-pill .dot{width:5px;height:5px;border-radius:50%;background:var(--brand);}
+
+/* LAYOUT */
+.container{max-width:1280px;margin:0 auto;padding:0 2rem;}
+.page-grid{display:grid;grid-template-columns:1fr 310px;gap:2rem;padding:2rem 0 4rem;}
+
+/* SECTION LABELS */
+.section-label{display:flex;align-items:center;gap:10px;margin-bottom:1.1rem;}
+.section-label h2{font-family:var(--serif);font-size:1.35rem;font-weight:700;letter-spacing:-0.2px;}
+.badge{background:var(--brand-light);color:var(--brand-dark);font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:2px;}
+.badge.green{background:var(--green-light);color:#085041;}
+.badge.blue{background:var(--blue-light);color:#0C447C;}
+.badge.amber{background:var(--amber-light);color:#633806;}
+
+/* CATEGORIES */
+.categories{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:1.75rem;scrollbar-width:none;}
+.categories::-webkit-scrollbar{display:none;}
+.cat-pill{background:white;border:1px solid var(--border-strong);border-radius:8px;padding:7px 14px;font-size:0.78rem;white-space:nowrap;cursor:pointer;transition:all 0.15s;display:flex;flex-direction:column;align-items:center;gap:2px;min-width:80px;text-align:center;}
+.cat-pill:hover{border-color:var(--brand);}
+.cat-pill.active{background:var(--ink);border-color:var(--ink);color:white;}
+.cat-pill .cat-emoji{font-size:1.1rem;}
+.cat-pill .cat-name{font-size:0.7rem;font-weight:500;}
+.cat-pill .cat-count{font-size:0.63rem;opacity:0.65;}
+
+/* FILTER TABS */
+.filter-tabs{display:flex;gap:7px;margin-bottom:1.25rem;flex-wrap:wrap;}
+.filter-tab{background:white;border:1px solid var(--border-strong);color:var(--ink-soft);padding:5px 13px;border-radius:999px;font-size:0.78rem;cursor:pointer;transition:all 0.15s;font-family:var(--sans);}
+.filter-tab:hover{border-color:var(--brand);color:var(--brand);}
+.filter-tab.active{background:var(--ink);border-color:var(--ink);color:white;}
+
+/* DEALS GRID */
+.deals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.1rem;margin-bottom:2rem;}
+.deal-card{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:box-shadow 0.2s,transform 0.2s;cursor:pointer;display:flex;flex-direction:column;}
+.deal-card:hover{box-shadow:0 6px 28px rgba(0,0,0,0.09);transform:translateY(-2px);}
+.deal-card.featured{border:2px solid var(--brand);grid-column:span 2;flex-direction:row;}
+.deal-card-img{background:var(--surface-2);display:flex;align-items:center;justify-content:center;padding:1.25rem;min-height:110px;position:relative;}
+.deal-card.featured .deal-card-img{width:180px;flex-shrink:0;}
+.deal-card-img img{max-width:120px;max-height:60px;width:auto;height:auto;object-fit:contain;}
+.deal-badge{position:absolute;top:8px;left:8px;font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
+.badge-hot{background:var(--brand);color:white;}
+.badge-new{background:var(--green);color:white;}
+.badge-email{background:var(--blue);color:white;}
+.badge-web{background:#534AB7;color:white;}
+.badge-free{background:#1D9E75;color:white;}
+
+.deal-card-body{padding:0.9rem 1rem 1rem;display:flex;flex-direction:column;flex:1;}
+.deal-source{font-size:0.67rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:4px;}
+.deal-title{font-family:var(--serif);font-size:0.98rem;font-weight:700;line-height:1.25;margin-bottom:5px;color:var(--ink);}
+.deal-desc{font-size:0.8rem;color:var(--ink-soft);line-height:1.5;margin-bottom:10px;flex:1;}
+.deal-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.deal-discount{font-size:1.3rem;font-weight:700;color:var(--brand);font-family:var(--mono);}
+.deal-original{font-size:0.73rem;color:var(--ink-muted);text-decoration:line-through;}
+.code-box{background:var(--surface-2);border:1px dashed var(--border-strong);border-radius:5px;padding:4px 9px;font-family:var(--mono);font-size:0.72rem;font-weight:500;color:var(--ink);cursor:pointer;transition:background 0.15s;display:flex;align-items:center;gap:5px;white-space:nowrap;}
+.code-box:hover{background:var(--ink);color:white;}
+.code-box svg{width:11px;height:11px;flex-shrink:0;}
+.deal-exp{font-size:0.67rem;color:var(--amber);margin-top:7px;font-weight:500;}
+.no-code{font-size:0.72rem;color:var(--green);font-weight:500;}
+
+/* SOURCE TAG on card */
+.src-tag{display:inline-flex;align-items:center;gap:4px;background:var(--surface-2);border-radius:3px;padding:2px 7px;font-size:0.62rem;font-weight:600;color:var(--ink-muted);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:6px;}
+
+/* PROMO BANNER */
+.promo-banner{background:var(--ink);border-radius:10px;padding:1.4rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem;}
+.promo-banner h3{font-family:var(--serif);font-size:1.15rem;font-weight:700;color:white;margin-bottom:3px;}
+.promo-banner p{font-size:0.8rem;color:rgba(255,255,255,0.5);}
+.promo-btn{background:var(--brand);color:white;border:none;padding:9px 18px;border-radius:6px;font-family:var(--sans);font-size:0.82rem;font-weight:500;cursor:pointer;white-space:nowrap;transition:background 0.15s;text-decoration:none;display:inline-block;}
+.promo-btn:hover{background:var(--brand-dark);}
+
+/* BRAND LOGOS STRIP */
+.brands-strip{background:white;border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.5rem;margin-bottom:2rem;overflow:hidden;}
+.brands-strip h3{font-size:0.68rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:1rem;}
+.brands-scroll{display:flex;gap:1.5rem;overflow-x:auto;scrollbar-width:none;align-items:center;padding-bottom:4px;}
+.brands-scroll::-webkit-scrollbar{display:none;}
+.brand-item{display:flex;flex-direction:column;align-items:center;gap:6px;flex-shrink:0;cursor:pointer;opacity:0.75;transition:opacity 0.15s;}
+.brand-item:hover{opacity:1;}
+.brand-item img{width:48px;height:28px;object-fit:contain;filter:grayscale(60%);}
+.brand-item:hover img{filter:none;}
+.brand-item span{font-size:0.65rem;color:var(--ink-muted);white-space:nowrap;}
+
+/* BRAND REVIEW */
+.brand-review-card{background:white;border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1.25rem;}
+.brand-review-header{display:flex;align-items:flex-start;gap:0.9rem;margin-bottom:1rem;padding-bottom:1rem;border-bottom:1px solid var(--border);}
+.brand-logo-big{width:56px;height:56px;border-radius:10px;background:white;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;padding:5px;}
+.brand-logo-big img{max-width:100%;max-height:100%;object-fit:contain;}
+.brand-meta h3{font-family:var(--serif);font-size:1.2rem;font-weight:700;margin-bottom:2px;}
+.stars{color:var(--amber);font-size:0.88rem;}
+.review-count{color:var(--ink-muted);font-size:0.75rem;margin-left:5px;}
+.brand-verdict{display:inline-block;background:var(--green-light);color:#085041;font-size:0.68rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:3px;margin-top:4px;}
+.brand-verdict.ok{background:var(--amber-light);color:#633806;}
+.brand-verdict.skip{background:#FCEBEB;color:#791F1F;}
+.review-pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin:0.9rem 0;}
+.pro-con-box{padding:0.8rem;border-radius:7px;}
+.pro-con-box.pros{background:var(--green-light);}
+.pro-con-box.cons{background:#FCEBEB;}
+.pro-con-box h4{font-size:0.67rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;}
+.pro-con-box.pros h4{color:#085041;}.pro-con-box.cons h4{color:#791F1F;}
+.pro-con-box ul{list-style:none;}
+.pro-con-box li{font-size:0.78rem;padding:2px 0;display:flex;gap:5px;align-items:flex-start;}
+.pro-con-box.pros li{color:#0F6E56;}.pro-con-box.cons li{color:#A32D2D;}
+.pro-con-box.pros li::before{content:'✓';font-weight:700;flex-shrink:0;margin-top:1px;}
+.pro-con-box.cons li::before{content:'✗';font-weight:700;flex-shrink:0;margin-top:1px;}
+.review-body{font-size:0.83rem;line-height:1.7;color:var(--ink-soft);margin-bottom:0.75rem;}
+.review-meta{font-size:0.72rem;color:var(--ink-muted);display:flex;gap:0.9rem;flex-wrap:wrap;}
+
+/* FULL REVIEW */
+.full-review{background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.75rem;}
+.full-review-header{background:var(--ink);padding:1.3rem 1.5rem;display:flex;align-items:center;gap:1rem;}
+.full-review-header h2{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:white;}
+.full-review-header p{font-size:0.78rem;color:rgba(255,255,255,0.45);margin-top:2px;}
+.full-review-body{padding:1.25rem;}
+.rating-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:1rem;}
+.rating-item{background:var(--surface-2);border-radius:7px;padding:9px 11px;}
+.rating-item .label{font-size:0.68rem;color:var(--ink-muted);margin-bottom:3px;font-weight:500;}
+.rating-bar-wrap{background:var(--border);border-radius:999px;height:3px;overflow:hidden;}
+.rating-bar{height:100%;border-radius:999px;background:var(--brand);}
+.rating-score{font-family:var(--mono);font-size:0.73rem;font-weight:500;color:var(--brand);margin-top:3px;}
+
+/* SIDEBAR */
+.sidebar-section{background:white;border:1px solid var(--border);border-radius:10px;padding:1.1rem;margin-bottom:1.1rem;}
+.sidebar-section h3{font-family:var(--serif);font-size:0.95rem;font-weight:700;margin-bottom:0.9rem;padding-bottom:0.7rem;border-bottom:1px solid var(--border);}
+.source-item{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border);}
+.source-item:last-child{border-bottom:none;}
+.source-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;flex-shrink:0;}
+.source-icon.em{background:var(--brand-light);color:var(--brand-dark);}
+.source-icon.web{background:var(--blue-light);color:#0C447C;}
+.source-icon.gr{background:var(--green-light);color:#085041;}
+.source-name{font-size:0.8rem;font-weight:500;}
+.source-sub{font-size:0.68rem;color:var(--ink-muted);}
+.source-count{font-family:var(--mono);font-size:0.75rem;font-weight:500;color:var(--brand);white-space:nowrap;margin-left:auto;}
+.sidebar-deal{display:flex;gap:9px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity 0.15s;}
+.sidebar-deal:hover{opacity:0.7;}
+.sidebar-deal:last-child{border-bottom:none;}
+.sidebar-deal-logo{width:34px;height:34px;border-radius:6px;background:white;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;padding:3px;}
+.sidebar-deal-logo img{max-width:100%;max-height:100%;object-fit:contain;}
+.sidebar-deal-info .name{font-size:0.78rem;font-weight:500;line-height:1.3;}
+.sidebar-deal-info .disc{font-size:0.72rem;color:var(--brand);font-weight:600;margin-top:1px;}
+
+/* TOAST */
+#toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:white;padding:9px 18px;border-radius:6px;font-size:0.82rem;font-weight:500;opacity:0;transform:translateY(8px);transition:opacity 0.2s,transform 0.2s;pointer-events:none;z-index:9999;border-left:3px solid var(--brand);}
+#toast.show{opacity:1;transform:translateY(0);}
+
+footer{background:var(--ink);color:rgba(255,255,255,0.4);text-align:center;padding:1.75rem;font-size:0.75rem;line-height:1.9;}
+footer strong{color:white;font-weight:500;}
+
+@media(max-width:960px){.page-grid{grid-template-columns:1fr;}}
+@media(max-width:720px){.deal-card.featured{flex-direction:column;grid-column:span 1;}.deal-card.featured .deal-card-img{width:100%;}.deals-grid{grid-template-columns:1fr;}}
+@media(max-width:600px){nav a:not(.nav-cta):not(:last-child){display:none;}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">Sc<span>oop</span></a>
+    <nav>
+      <a href="#">Deals</a>
+      <a href="#">Reviews</a>
+      <a href="#">Codes</a>
+      <a href="#">Freebies</a>
+      <a href="#" class="nav-cta">Get Alerts</a>
+    </nav>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-inner" id="ticker">
+    <span>🔥 NORTH FACE: 50% off select styles</span><span class="dot">·</span>
+    <span>🏷️ HOKA: Rincon 4 shoes $88 via Woot (was $125)</span><span class="dot">·</span>
+    <span>🍔 NATIONAL BURGER DAY: BurgerFi burger $5.28</span><span class="dot">·</span>
+    <span>📧 CHEWY: 35% off first Autoship — email exclusive</span><span class="dot">·</span>
+    <span>🎮 PLAYSTATION DAYS OF PLAY: PSVR2 $299</span><span class="dot">·</span>
+    <span>🛒 LINENS & HUTCH: 72% off sitewide — code BRADS72</span><span class="dot">·</span>
+    <span>👕 32 DEGREES: Pull-On Shorts $9.99 (was $48)</span><span class="dot">·</span>
+    <span>🏠 LOWE'S: Memorial Day sale — grills & patio through June 3</span><span class="dot">·</span>
+    <span>🍕 HUNGRY HOWIE'S: 2nd pizza 99¢ — code ANY99</span><span class="dot">·</span>
+    <span>📦 AMAZON: LEGO Star Wars AT-AT Walker $52 (was $65)</span><span class="dot">·</span>
+    <span>🔥 NORTH FACE: 50% off select styles</span><span class="dot">·</span>
+    <span>🏷️ HOKA: Rincon 4 shoes $88 via Woot (was $125)</span><span class="dot">·</span>
+    <span>🍔 NATIONAL BURGER DAY: BurgerFi burger $5.28</span><span class="dot">·</span>
+    <span>📧 CHEWY: 35% off first Autoship — email exclusive</span><span class="dot">·</span>
+    <span>🎮 PLAYSTATION DAYS OF PLAY: PSVR2 $299</span><span class="dot">·</span>
+    <span>🛒 LINENS & HUTCH: 72% off sitewide — code BRADS72</span><span class="dot">·</span>
+    <span>👕 32 DEGREES: Pull-On Shorts $9.99 (was $48)</span><span class="dot">·</span>
+    <span>🏠 LOWE'S: Memorial Day sale — grills & patio through June 3</span><span class="dot">·</span>
+    <span>🍕 HUNGRY HOWIE'S: 2nd pizza 99¢ — code ANY99</span><span class="dot">·</span>
+    <span>📦 AMAZON: LEGO Star Wars AT-AT Walker $52 (was $65)</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-tag">Updated daily · 200+ live deals</p>
+  <h1>The <em>smartest</em> way to find deals online</h1>
+  <p>Curated deals, brand reviews & promo codes sourced from the web's best deal communities — all in one place.</p>
+  <div class="source-pills">
+    <div class="source-pill"><span class="dot"></span>Slickdeals</div>
+    <div class="source-pill"><span class="dot"></span>Hip2Save</div>
+    <div class="source-pill"><span class="dot"></span>Brad's Deals</div>
+    <div class="source-pill"><span class="dot"></span>Krazy Coupon Lady</div>
+    <div class="source-pill"><span class="dot"></span>DealNews</div>
+    <div class="source-pill"><span class="dot"></span>Email Exclusives</div>
+  </div>
+</section>
+
+<div class="container">
+
+<!-- BRAND LOGOS STRIP -->
+<div style="padding-top:1.75rem;">
+<div class="brands-strip">
+  <h3>🛍️ Browse by brand — deals updated daily</h3>
+  <div class="brands-scroll" id="brandScroll">
+    <div class="brand-item"><img src="https://logo.clearbit.com/amazon.com" alt="Amazon" onerror="this.style.display='none'"><span>Amazon</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/walmart.com" alt="Walmart" onerror="this.style.display='none'"><span>Walmart</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/target.com" alt="Target" onerror="this.style.display='none'"><span>Target</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/bestbuy.com" alt="Best Buy" onerror="this.style.display='none'"><span>Best Buy</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/kohls.com" alt="Kohl's" onerror="this.style.display='none'"><span>Kohl's</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/chewy.com" alt="Chewy" onerror="this.style.display='none'"><span>Chewy</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/ulta.com" alt="Ulta" onerror="this.style.display='none'"><span>Ulta</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/oldnavy.com" alt="Old Navy" onerror="this.style.display='none'"><span>Old Navy</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/nike.com" alt="Nike" onerror="this.style.display='none'"><span>Nike</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/adidas.com" alt="Adidas" onerror="this.style.display='none'"><span>Adidas</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/nordstrom.com" alt="Nordstrom" onerror="this.style.display='none'"><span>Nordstrom</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/macys.com" alt="Macy's" onerror="this.style.display='none'"><span>Macy's</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/gap.com" alt="Gap" onerror="this.style.display='none'"><span>Gap</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/lululemon.com" alt="Lululemon" onerror="this.style.display='none'"><span>Lululemon</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/homedepot.com" alt="Home Depot" onerror="this.style.display='none'"><span>Home Depot</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/lowes.com" alt="Lowe's" onerror="this.style.display='none'"><span>Lowe's</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/sephora.com" alt="Sephora" onerror="this.style.display='none'"><span>Sephora</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/bathandbodyworks.com" alt="Bath & Body" onerror="this.style.display='none'"><span>Bath & Body</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/wayfair.com" alt="Wayfair" onerror="this.style.display='none'"><span>Wayfair</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/costco.com" alt="Costco" onerror="this.style.display='none'"><span>Costco</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/samsclub.com" alt="Sam's Club" onerror="this.style.display='none'"><span>Sam's Club</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/jcpenney.com" alt="JCPenney" onerror="this.style.display='none'"><span>JCPenney</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/cvs.com" alt="CVS" onerror="this.style.display='none'"><span>CVS</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/walgreens.com" alt="Walgreens" onerror="this.style.display='none'"><span>Walgreens</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/instacart.com" alt="Instacart" onerror="this.style.display='none'"><span>Instacart</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/michaels.com" alt="Michaels" onerror="this.style.display='none'"><span>Michaels</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/hobbylobby.com" alt="Hobby Lobby" onerror="this.style.display='none'"><span>Hobby Lobby</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/dollaretree.com" alt="Dollar Tree" onerror="this.style.display='none'"><span>Dollar Tree</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/starbucks.com" alt="Starbucks" onerror="this.style.display='none'"><span>Starbucks</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/crocs.com" alt="Crocs" onerror="this.style.display='none'"><span>Crocs</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/underarmour.com" alt="Under Armour" onerror="this.style.display='none'"><span>Under Armour</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/thechildrensplace.com" alt="Children's Place" onerror="this.style.display='none'"><span>Children's Place</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/carters.com" alt="Carter's" onerror="this.style.display='none'"><span>Carter's</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/rei.com" alt="REI" onerror="this.style.display='none'"><span>REI</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/dickssportinggoods.com" alt="Dick's" onerror="this.style.display='none'"><span>Dick's</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/academy.com" alt="Academy" onerror="this.style.display='none'"><span>Academy</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/ebay.com" alt="eBay" onerror="this.style.display='none'"><span>eBay</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/apple.com" alt="Apple" onerror="this.style.display='none'"><span>Apple</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/sony.com" alt="Sony" onerror="this.style.display='none'"><span>Sony</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/samsung.com" alt="Samsung" onerror="this.style.display='none'"><span>Samsung</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/dell.com" alt="Dell" onerror="this.style.display='none'"><span>Dell</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/woot.com" alt="Woot" onerror="this.style.display='none'"><span>Woot</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/groupon.com" alt="Groupon" onerror="this.style.display='none'"><span>Groupon</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/athleta.com" alt="Athleta" onerror="this.style.display='none'"><span>Athleta</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/quince.com" alt="Quince" onerror="this.style.display='none'"><span>Quince</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/hoka.com" alt="HOKA" onerror="this.style.display='none'"><span>HOKA</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/birkenstock.com" alt="Birkenstock" onerror="this.style.display='none'"><span>Birkenstock</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/levi.com" alt="Levi's" onerror="this.style.display='none'"><span>Levi's</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/aldi.us" alt="Aldi" onerror="this.style.display='none'"><span>Aldi</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/kroger.com" alt="Kroger" onerror="this.style.display='none'"><span>Kroger</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/staples.com" alt="Staples" onerror="this.style.display='none'"><span>Staples</span></div>
+    <div class="brand-item"><img src="https://logo.clearbit.com/bananarepublic.com" alt="Banana Republic" onerror="this.style.display='none'"><span>Banana Republic</span></div>
+  </div>
+</div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="categories" style="margin-top:0.5rem;">
+  <div class="cat-pill active"><span class="cat-emoji">🛍️</span><span class="cat-name">All</span><span class="cat-count">200+ live</span></div>
+  <div class="cat-pill"><span class="cat-emoji">🏠</span><span class="cat-name">Home</span><span class="cat-count">41</span></div>
+  <div class="cat-pill"><span class="cat-emoji">👗</span><span class="cat-name">Fashion</span><span class="cat-count">38</span></div>
+  <div class="cat-pill"><span class="cat-emoji">🐾</span><span class="cat-name">Pets</span><span class="cat-count">19</span></div>
+  <div class="cat-pill"><span class="cat-emoji">🧴</span><span class="cat-name">Beauty</span><span class="cat-count">24</span></div>
+  <div class="cat-pill"><span class="cat-emoji">🛒</span><span class="cat-name">Grocery</span><span class="cat-count">33</span></div>
+  <div class="cat-pill"><span class="cat-emoji">💻</span><span class="cat-name">Tech</span><span class="cat-count">28</span></div>
+  <div class="cat-pill"><span class="cat-emoji">🎮</span><span class="cat-name">Gaming</span><span class="cat-count">15</span></div>
+  <div class="cat-pill"><span class="cat-emoji">🍕</span><span class="cat-name">Food</span><span class="cat-count">22</span></div>
+  <div class="cat-pill"><span class="cat-emoji">✈️</span><span class="cat-name">Travel</span><span class="cat-count">12</span></div>
+  <div class="cat-pill"><span class="cat-emoji">🧸</span><span class="cat-name">Kids</span><span class="cat-count">17</span></div>
+  <div class="cat-pill"><span class="cat-emoji">🎁</span><span class="cat-name">Freebies</span><span class="cat-count">9</span></div>
+</div>
+
+<div class="page-grid">
+<main>
+
+<!-- FILTER TABS -->
+<div class="section-label">
+  <h2>Today's Deals</h2>
+  <span class="badge">🔥 May 29, 2026</span>
+</div>
+<div class="filter-tabs">
+  <button class="filter-tab active">All Sources</button>
+  <button class="filter-tab">📰 Slickdeals</button>
+  <button class="filter-tab">💡 Hip2Save</button>
+  <button class="filter-tab">🧡 Brad's Deals</button>
+  <button class="filter-tab">✂️ Krazy Coupon Lady</button>
+  <button class="filter-tab">📧 Email Exclusives</button>
+  <button class="filter-tab">🌐 Web Promos</button>
+</div>
+
+<div class="deals-grid">
+
+  <!-- FEATURED -->
+  <div class="deal-card featured">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/thenorthface.com" alt="The North Face" onerror="this.outerHTML='<span style=\'font-family:var(--serif);font-size:1.1rem;font-weight:900;\'>TNF</span>'">
+      <span class="deal-badge badge-hot">🔥 Hip2Save Pick</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Hip2Save · May 29</div>
+      <div class="deal-source">Apparel · Outdoor</div>
+      <div class="deal-title">The North Face — 50% off select styles sitewide</div>
+      <div class="deal-desc">Hip2Save flagged this as one of the best North Face events this year. Includes jackets, fleeces, and backpacks. Free shipping on orders $75+. Stack with a credit card cashback portal for extra savings. No promo code needed — discount applies automatically at checkout.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">50% OFF</div><div class="deal-original">Regular site pricing</div></div>
+        <span class="no-code">✓ No code needed · Auto-applied</span>
+      </div>
+      <div class="deal-exp">⏰ Limited time — check site for end date</div>
+    </div>
+  </div>
+
+  <!-- CARD: HOKA -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/hoka.com" alt="HOKA" onerror="this.outerHTML='HOKA'">
+      <span class="deal-badge badge-new">Brad's Deals</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Brad's Deals · Today</div>
+      <div class="deal-source">Footwear · Running</div>
+      <div class="deal-title">HOKA Rincon 4 Running Shoes — $88 at Woot (was $125)</div>
+      <div class="deal-desc">One of HOKA's most popular minimalist-cushion styles. Available in Black/White only. Brad's confirmed free shipping with Prime, or $6 without. Best price since February per Brad's team.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">$88</div><div class="deal-original">Was $125</div></div>
+        <span class="no-code">✓ No code — Woot price</span>
+      </div>
+      <div class="deal-exp">⏰ Ends May 28 — check Woot</div>
+    </div>
+  </div>
+
+  <!-- CARD: PLAYSTATION -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/playstation.com" alt="PlayStation" onerror="this.outerHTML='PS'">
+      <span class="deal-badge badge-hot">🔥 Slickdeals FP</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Slickdeals Frontpage · Today</div>
+      <div class="deal-source">Gaming · PlayStation</div>
+      <div class="deal-title">PlayStation Days of Play: PSVR2 $299, DualSense $54 & more</div>
+      <div class="deal-desc">Slickdeals Frontpage deal — huge PlayStation event. PSVR2 drops to $299, DualSense controllers to $54. Multiple items discounted across consoles and accessories.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">From $54</div></div>
+        <span class="no-code">✓ Sale pricing — no code</span>
+      </div>
+      <div class="deal-exp">⏰ Days of Play — check PlayStation site</div>
+    </div>
+  </div>
+
+  <!-- CARD: LINENS & HUTCH -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/linensandhutch.com" alt="Linens & Hutch" onerror="this.style.display='none'">
+      <div style="font-family:var(--serif);font-size:1rem;font-weight:900;text-align:center;line-height:1.2;">Linens<br>&amp; Hutch</div>
+      <span class="deal-badge badge-new">Brad's Deals</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Brad's Deals Exclusive · Today</div>
+      <div class="deal-source">Home · Bedding</div>
+      <div class="deal-title">72% off sitewide — sheets, comforters, pillows & more</div>
+      <div class="deal-desc">Brad's exclusive code — deepest sitewide discount they've ever seen at this store. Comforter sets go from $139 down to ~$39. Free shipping + returns, 101-night guarantee.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">72% OFF</div></div>
+        <div class="code-box" onclick="copyCode('BRADS72')">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="8" height="9" rx="1"/><path d="M3 11V3a1 1 0 011-1h8"/></svg>BRADS72
+        </div>
+      </div>
+      <div class="deal-exp">⏰ Exclusive — may expire soon</div>
+    </div>
+  </div>
+
+  <!-- CARD: 32 DEGREES -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/32degrees.com" alt="32 Degrees" onerror="this.style.display='none'">
+      <div style="font-family:var(--serif);font-size:1.1rem;font-weight:900;">32°</div>
+      <span class="deal-badge badge-new">Brad's Deals</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Brad's Deals · Today</div>
+      <div class="deal-source">Fashion · Basics</div>
+      <div class="deal-title">Featherweight Pull-On Shorts $9.99 (was $48) — 4 colors</div>
+      <div class="deal-desc">Brad's confirmed this as the best price by over $10. Free shipping on $24+ when you use code BRAD24. 4 colors available. Great for summer.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">$9.99</div><div class="deal-original">Was $48</div></div>
+        <div class="code-box" onclick="copyCode('BRAD24')">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="8" height="9" rx="1"/><path d="M3 11V3a1 1 0 011-1h8"/></svg>BRAD24
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD: BURGERFRI -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/burgerfi.com" alt="BurgerFi" onerror="this.outerHTML='<span style=\'font-family:var(--serif);font-weight:900;\'>🍔</span>'">
+      <span class="deal-badge badge-hot">🍔 National Burger Day</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Krazy Coupon Lady · Today only</div>
+      <div class="deal-source">Restaurants · Fast Casual</div>
+      <div class="deal-title">BurgerFi: Burger or Cheeseburger just $5.28 — Rewards members</div>
+      <div class="deal-desc">National Burger Day special via KCL. Must be a BurgerFi Rewards member. In-app deal, today May 28 only. Limit one per member.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">$5.28</div></div>
+        <span class="no-code">✓ Rewards app — no code</span>
+      </div>
+      <div class="deal-exp">⚡ Today only — May 28</div>
+    </div>
+  </div>
+
+  <!-- CARD: HUNGRY HOWIE'S -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/hungryhowies.com" alt="Hungry Howie's" onerror="this.outerHTML='🍕'">
+      <span class="deal-badge badge-email">✂️ KCL</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Krazy Coupon Lady · Ongoing</div>
+      <div class="deal-source">Restaurants · Pizza</div>
+      <div class="deal-title">2nd pizza 99¢ when you buy one at regular price</div>
+      <div class="deal-desc">Use code ANY99 at checkout online or in-app at Hungry Howie's. Any pizza, equal or lesser value for just 99 cents. Great stacking deal with toppings upgrades.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">2nd for 99¢</div></div>
+        <div class="code-box" onclick="copyCode('ANY99')">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="8" height="9" rx="1"/><path d="M3 11V3a1 1 0 011-1h8"/></svg>ANY99
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD: CHEWY -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/chewy.com" alt="Chewy" onerror="this.outerHTML='Chewy'">
+      <span class="deal-badge badge-email">📧 Email</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Email Exclusive · Expires June 2</div>
+      <div class="deal-source">Pets · Autoship</div>
+      <div class="deal-title">35% off first Autoship + free shipping on $49+</div>
+      <div class="deal-desc">Email-exclusive code for new Autoship subscribers. Chewy Autoship already saves 5–10% on recurring orders — stacking this brings first-order savings to 35–40%.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">35% OFF</div></div>
+        <div class="code-box" onclick="copyCode('CHEWYWELCOME35')">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="8" height="9" rx="1"/><path d="M3 11V3a1 1 0 011-1h8"/></svg>CHEWYWELCOME35
+        </div>
+      </div>
+      <div class="deal-exp">⏰ Expires June 2</div>
+    </div>
+  </div>
+
+  <!-- CARD: LEGO AT-AT -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/lego.com" alt="LEGO" onerror="this.outerHTML='LEGO'">
+      <span class="deal-badge badge-hot">🔥 Slickdeals FP</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Slickdeals Frontpage · Today</div>
+      <div class="deal-source">Kids · Toys</div>
+      <div class="deal-title">525-Pc LEGO Star Wars AT-AT Walker $52 at Amazon (was $65)</div>
+      <div class="deal-desc">Slickdeals community-voted frontpage deal. Free shipping with Prime. Good gift pick ahead of summer. Limited stock at this price.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">$51.99</div><div class="deal-original">Was $64.99</div></div>
+        <span class="no-code">✓ Amazon pricing — no code</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD: BANANA REPUBLIC -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/bananarepublic.com" alt="Banana Republic" onerror="this.outerHTML='BR'">
+      <span class="deal-badge badge-web">🌐 Web</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Slickdeals · 20h ago</div>
+      <div class="deal-source">Fashion · Outlet</div>
+      <div class="deal-title">Banana Republic Outlet: Extra 50% off sale + free shipping $45+</div>
+      <div class="deal-desc">Stacks on already-reduced outlet prices. Free shipping threshold is reasonable. Great time for workwear basics and denim. No code needed — discount in cart.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">Extra 50% OFF</div></div>
+        <span class="no-code">✓ Auto-applied in cart</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD: PUREBOOST -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/pureboost.com" alt="Pureboost" onerror="this.style.display='none'">
+      <div style="font-family:var(--serif);font-size:1rem;font-weight:900;">Pureboost</div>
+      <span class="deal-badge badge-new">Brad's Exclusive</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Brad's Deals Exclusive · Today</div>
+      <div class="deal-source">Health · Energy</div>
+      <div class="deal-title">30-ct Clean Energy + Hydration Packets — $20 (was $34.99)</div>
+      <div class="deal-desc">Brad's exclusive code drops price + adds free shipping (saves $5.99). No sugar, no sweeteners. B12 + natural green tea caffeine. Made in USA.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">$20</div><div class="deal-original">Was $34.99</div></div>
+        <div class="code-box" onclick="copyCode('BRADSENERGY')">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="8" height="9" rx="1"/><path d="M3 11V3a1 1 0 011-1h8"/></svg>BRADSENERGY
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD: LOWE'S -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/lowes.com" alt="Lowe's" onerror="this.outerHTML='Lowes'">
+      <span class="deal-badge badge-hot">🏠 Hip2Save</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Hip2Save · Memorial Day Sale</div>
+      <div class="deal-source">Home · Outdoor</div>
+      <div class="deal-title">Lowe's Memorial Day Sale — grills, patio, lawn & garden</div>
+      <div class="deal-desc">Hip2Save highlighted Lowe's as a top Memorial Day pick. Deals on grills, outdoor furniture, and garden tools. Available in-store and on Lowes.com through June 3rd.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">Up to 40%</div></div>
+        <span class="no-code">✓ Sale pricing through June 3</span>
+      </div>
+      <div class="deal-exp">⏰ Through June 3, 2026</div>
+    </div>
+  </div>
+
+  <!-- CARD: TARGET MATTEL -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/target.com" alt="Target" onerror="this.outerHTML='Target'">
+      <span class="deal-badge badge-hot">🔥 Slickdeals FP</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Slickdeals Frontpage · 1d ago</div>
+      <div class="deal-source">Kids · Games</div>
+      <div class="deal-title">Mattel Uno Splash Waterproof Card Game — $8.44 (was $18.78)</div>
+      <div class="deal-desc">Community-voted Slickdeals frontpage deal. Perfect summer game. Free shipping on $35+ or same-day pickup at Target. Also: Mattel Spirits of the Wild game $6.15.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">$8.44</div><div class="deal-original">Was $18.78</div></div>
+        <span class="no-code">✓ Target sale price</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD: ULTA -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/ulta.com" alt="Ulta" onerror="this.outerHTML='Ulta'">
+      <span class="deal-badge badge-hot">🔥 Hot</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Web Promo · Verified</div>
+      <div class="deal-source">Beauty · Skincare</div>
+      <div class="deal-title">30% off almost anything sitewide — Ulta Beauty</div>
+      <div class="deal-desc">Stackable with Ulta points redemptions and works in-store too. Huge skincare and gift set selection. Our team confirmed it's working at checkout.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">30% OFF</div></div>
+        <div class="code-box" onclick="copyCode('SUMMER30')">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="8" height="9" rx="1"/><path d="M3 11V3a1 1 0 011-1h8"/></svg>SUMMER30
+        </div>
+      </div>
+      <div class="deal-exp">⏰ Ends May 31</div>
+    </div>
+  </div>
+
+  <!-- CARD: KOHLS -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/kohls.com" alt="Kohl's" onerror="this.outerHTML='Kohls'">
+      <span class="deal-badge badge-email">📧 Email</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Email Exclusive · Expires June 3</div>
+      <div class="deal-source">Department Store</div>
+      <div class="deal-title">Extra 20% off entire purchase + earn Kohl's Cash on $50+</div>
+      <div class="deal-desc">Stack with clearance + Kohl's Cash + this email code for triple savings. Kohl's Cash earned now can be spent later. Reliable loyalty stacking.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">20% OFF</div></div>
+        <div class="code-box" onclick="copyCode('EXTRA20MAY')">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="8" height="9" rx="1"/><path d="M3 11V3a1 1 0 011-1h8"/></svg>EXTRA20MAY
+        </div>
+      </div>
+      <div class="deal-exp">⏰ Expires June 3</div>
+    </div>
+  </div>
+
+  <!-- CARD: INSOMNIA COOKIES -->
+  <div class="deal-card">
+    <div class="deal-card-img">
+      <img src="https://logo.clearbit.com/insomniacookies.com" alt="Insomnia Cookies" onerror="this.outerHTML='🍪'">
+      <span class="deal-badge badge-free">🎁 Free</span>
+    </div>
+    <div class="deal-card-body">
+      <div class="src-tag">Krazy Coupon Lady · Ongoing</div>
+      <div class="deal-source">Food · Bakery</div>
+      <div class="deal-title">Insomnia Cookies: 4 free Classic Cookies when you buy a dozen</div>
+      <div class="deal-desc">KCL verified — Rewards members only. Limit one use per day, valid in-store, online, and in-app. Great recurring deal if you're a regular.</div>
+      <div class="deal-footer">
+        <div><div class="deal-discount">4 FREE</div><div class="deal-original">Buy a dozen</div></div>
+        <span class="no-code">✓ Rewards program — no code</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end deals-grid -->
+
+<!-- PROMO BANNER -->
+<div class="promo-banner">
+  <div>
+    <h3>Never miss a hot deal again</h3>
+    <p>We monitor Slickdeals, Hip2Save, Brad's Deals, KCL, DealNews & more — 24/7.</p>
+  </div>
+  <a href="#" class="promo-btn">Get Free Alerts →</a>
+</div>
+
+<!-- BRAND REVIEWS -->
+<div class="section-label">
+  <h2>Brand Reviews</h2>
+  <span class="badge green">In-depth</span>
+</div>
+
+<!-- FULL REVIEW: CHEWY -->
+<div class="full-review">
+  <div class="full-review-header">
+    <div style="width:46px;height:46px;border-radius:9px;background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:5px;overflow:hidden;">
+      <img src="https://logo.clearbit.com/chewy.com" alt="Chewy" style="max-width:100%;max-height:100%;object-fit:contain;" onerror="this.outerHTML='Ch'">
+    </div>
+    <div><h2>Chewy — Is It Worth It?</h2><p>Reviewed by Scoop · Updated May 2026 · 3+ years of tracking</p></div>
+  </div>
+  <div class="full-review-body">
+    <div class="rating-grid">
+      <div class="rating-item"><div class="label">Deal Frequency</div><div class="rating-bar-wrap"><div class="rating-bar" style="width:90%"></div></div><div class="rating-score">9.0/10</div></div>
+      <div class="rating-item"><div class="label">Code Reliability</div><div class="rating-bar-wrap"><div class="rating-bar" style="width:82%"></div></div><div class="rating-score">8.2/10</div></div>
+      <div class="rating-item"><div class="label">Stackability</div><div class="rating-bar-wrap"><div class="rating-bar" style="width:70%"></div></div><div class="rating-score">7.0/10</div></div>
+      <div class="rating-item"><div class="label">Overall Value</div><div class="rating-bar-wrap"><div class="rating-bar" style="width:88%"></div></div><div class="rating-score">8.8/10</div></div>
+    </div>
+    <p class="review-body">Chewy is one of the most consistently deal-friendly retailers for pet owners. Their Autoship program saves 5–10% on recurring orders automatically, and they regularly issue email-exclusive codes reaching 35–40% off for new subscribers. Promo codes shared across deal communities often work site-wide and can stack with Autoship for serious savings.</p>
+    <div class="review-pros-cons">
+      <div class="pro-con-box pros"><h4>What we love</h4><ul><li>Autoship stacks with promo codes</li><li>Email list has exclusive, verified codes</li><li>Outstanding customer service & returns</li><li>Free 1–2 day shipping on $49+</li></ul></div>
+      <div class="pro-con-box cons"><h4>Watch out for</h4><ul><li>Best codes are new-customer-only</li><li>Codes sometimes expire unannounced</li><li>No in-store option</li></ul></div>
+    </div>
+    <div class="review-meta">
+      <span>🏷️ <strong>Best deal type:</strong> Email exclusives + Autoship</span>
+      <span>📅 Last verified: May 29, 2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- BRAND REVIEW GRID -->
+<div class="section-label" style="margin-top:1.5rem;">
+  <h2>Quick Brand Picks</h2>
+  <span class="badge blue">Verified this week</span>
+</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem;margin-bottom:2rem;">
+
+  <div class="brand-review-card">
+    <div class="brand-review-header">
+      <div class="brand-logo-big"><img src="https://logo.clearbit.com/target.com" alt="Target" onerror="this.outerHTML='TGT'"></div>
+      <div class="brand-meta"><h3>Target</h3><div><span class="stars">★★★★☆</span><span class="review-count">8.4/10</span></div><span class="brand-verdict">Strong Pick</span></div>
+    </div>
+    <p class="review-body" style="font-size:0.8rem;">Circle deals are frequent and stack with RedCard (5% back). Great for home, clothing, and grocery. Price matches Amazon/Walmart within 14 days.</p>
+    <div class="review-meta">📧 Best tip: Join Target Circle + RedCard combo</div>
+  </div>
+
+  <div class="brand-review-card">
+    <div class="brand-review-header">
+      <div class="brand-logo-big"><img src="https://logo.clearbit.com/amazon.com" alt="Amazon" onerror="this.outerHTML='AMZ'"></div>
+      <div class="brand-meta"><h3>Amazon</h3><div><span class="stars">★★★★★</span><span class="review-count">9.1/10</span></div><span class="brand-verdict">Top Rated</span></div>
+    </div>
+    <p class="review-body" style="font-size:0.8rem;">Slickdeals' most-posted retailer. Lightning Deals and Prime member pricing are the best entry points. Stack with cashback portals for extra savings.</p>
+    <div class="review-meta">🔥 Best tip: Set deal alerts on Slickdeals</div>
+  </div>
+
+  <div class="brand-review-card">
+    <div class="brand-review-header">
+      <div class="brand-logo-big"><img src="https://logo.clearbit.com/kohls.com" alt="Kohl's" onerror="this.outerHTML='KHL'"></div>
+      <div class="brand-meta"><h3>Kohl's</h3><div><span class="stars">★★★★☆</span><span class="review-count">8.1/10</span></div><span class="brand-verdict">Strong Pick</span></div>
+    </div>
+    <p class="review-body" style="font-size:0.8rem;">King of deal stacking. Email codes + Kohl's Cash + clearance = some of the deepest retail discounts. Email list is reliable and frequent.</p>
+    <div class="review-meta">📧 Best tip: Stack email codes with Kohl's Cash</div>
+  </div>
+
+  <div class="brand-review-card">
+    <div class="brand-review-header">
+      <div class="brand-logo-big"><img src="https://logo.clearbit.com/walmart.com" alt="Walmart" onerror="this.outerHTML='WMT'"></div>
+      <div class="brand-meta"><h3>Walmart</h3><div><span class="stars">★★★★☆</span><span class="review-count">7.9/10</span></div><span class="brand-verdict">Strong Pick</span></div>
+    </div>
+    <p class="review-body" style="font-size:0.8rem;">Rollback pricing is consistent. Walmart+ members get free delivery and fuel discounts. Slickdeals often posts graphic tee and grocery deals here.</p>
+    <div class="review-meta">🛒 Best tip: Walmart+ for grocery + free shipping</div>
+  </div>
+
+  <div class="brand-review-card">
+    <div class="brand-review-header">
+      <div class="brand-logo-big"><img src="https://logo.clearbit.com/sephora.com" alt="Sephora" onerror="this.outerHTML='Seph'"></div>
+      <div class="brand-meta"><h3>Sephora</h3><div><span class="stars">★★★☆☆</span><span class="review-count">6.5/10</span></div><span class="brand-verdict ok">Use Cautiously</span></div>
+    </div>
+    <p class="review-body" style="font-size:0.8rem;">Deals mostly tied to Beauty Insider tier. Codes rarely stack. Best value: birthday gift + major sale events (Spring Savings, VIB Sale).</p>
+    <div class="review-meta">📧 Best tip: VIB Rouge status for biggest savings</div>
+  </div>
+
+  <div class="brand-review-card">
+    <div class="brand-review-header">
+      <div class="brand-logo-big"><img src="https://logo.clearbit.com/bathandbodyworks.com" alt="Bath & Body" onerror="this.outerHTML='B&B'"></div>
+      <div class="brand-meta"><h3>Bath & Body Works</h3><div><span class="stars">★★★★☆</span><span class="review-count">7.8/10</span></div><span class="brand-verdict">Strong Pick</span></div>
+    </div>
+    <p class="review-body" style="font-size:0.8rem;">Semi-annual sales are legendary (up to 75% off). In-store coupons stack with sale items. Email list sends $10 off $30 regularly.</p>
+    <div class="review-meta">📧 Best tip: Join email list for $10 off coupons</div>
+  </div>
+
+</div>
+
+</main>
+
+<!-- SIDEBAR -->
+<aside>
+
+  <div class="sidebar-section">
+    <h3>📡 Deal Sources</h3>
+    <div class="source-item">
+      <div class="source-icon web" style="font-size:0.65rem;font-weight:800;">SD</div>
+      <div><div class="source-name">Slickdeals</div><div class="source-sub">Community-voted frontpage</div></div>
+      <div class="source-count">74 today</div>
+    </div>
+    <div class="source-item">
+      <div class="source-icon gr" style="font-size:0.65rem;font-weight:800;">H2</div>
+      <div><div class="source-name">Hip2Save</div><div class="source-sub">Expert-curated picks</div></div>
+      <div class="source-count">38 today</div>
+    </div>
+    <div class="source-item">
+      <div class="source-icon web" style="font-size:0.65rem;font-weight:800;">BD</div>
+      <div><div class="source-name">Brad's Deals</div><div class="source-sub">Exclusive codes & picks</div></div>
+      <div class="source-count">22 today</div>
+    </div>
+    <div class="source-item">
+      <div class="source-icon gr" style="font-size:0.65rem;font-weight:800;">KCL</div>
+      <div><div class="source-name">Krazy Coupon Lady</div><div class="source-sub">Coupons & freebies</div></div>
+      <div class="source-count">31 today</div>
+    </div>
+    <div class="source-item">
+      <div class="source-icon em">📧</div>
+      <div><div class="source-name">Email Exclusives</div><div class="source-sub">Brand newsletters</div></div>
+      <div class="source-count">14 today</div>
+    </div>
+    <div class="source-item">
+      <div class="source-icon web">🌐</div>
+      <div><div class="source-name">Web Promos</div><div class="source-sub">Verified site-wide codes</div></div>
+      <div class="source-count">29 today</div>
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <h3>⏰ Expiring Soon</h3>
+    <div class="sidebar-deal">
+      <div class="sidebar-deal-logo"><img src="https://logo.clearbit.com/ulta.com" alt="Ulta" onerror="this.outerHTML='U'"></div>
+      <div class="sidebar-deal-info"><div class="name">Ulta 30% off — SUMMER30</div><div class="disc">Ends May 31 · Web promo</div></div>
+    </div>
+    <div class="sidebar-deal">
+      <div class="sidebar-deal-logo"><img src="https://logo.clearbit.com/burgerfi.com" alt="BurgerFi" onerror="this.outerHTML='🍔'"></div>
+      <div class="sidebar-deal-info"><div class="name">BurgerFi $5.28 burger</div><div class="disc">Today only · KCL</div></div>
+    </div>
+    <div class="sidebar-deal">
+      <div class="sidebar-deal-logo"><img src="https://logo.clearbit.com/chewy.com" alt="Chewy" onerror="this.outerHTML='C'"></div>
+      <div class="sidebar-deal-info"><div class="name">Chewy 35% off Autoship</div><div class="disc">Expires June 2 · Email</div></div>
+    </div>
+    <div class="sidebar-deal">
+      <div class="sidebar-deal-logo"><img src="https://logo.clearbit.com/kohls.com" alt="Kohl's" onerror="this.outerHTML='K'"></div>
+      <div class="sidebar-deal-info"><div class="name">Kohl's 20% off — EXTRA20MAY</div><div class="disc">Expires June 3 · Email</div></div>
+    </div>
+    <div class="sidebar-deal">
+      <div class="sidebar-deal-logo"><img src="https://logo.clearbit.com/lowes.com" alt="Lowe's" onerror="this.outerHTML='L'"></div>
+      <div class="sidebar-deal-info"><div class="name">Lowe's Memorial Day sale</div><div class="disc">Through June 3 · Hip2Save</div></div>
+    </div>
+  </div>
+
+  <div class="sidebar-section">
+    <h3>🏷️ Top Active Codes</h3>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
+          <img src="https://logo.clearbit.com/ulta.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.style.display='none'">Ulta</span>
+        <div class="code-box" onclick="copyCode('SUMMER30')" style="font-size:0.68rem;">SUMMER30</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
+          <img src="https://logo.clearbit.com/chewy.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.style.display='none'">Chewy</span>
+        <div class="code-box" onclick="copyCode('CHEWYWELCOME35')" style="font-size:0.68rem;">CHEWYWELCOME35</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
+          <img src="https://logo.clearbit.com/kohls.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.style.display='none'">Kohl's</span>
+        <div class="code-box" onclick="copyCode('EXTRA20MAY')" style="font-size:0.68rem;">EXTRA20MAY</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
+          <img src="https://logo.clearbit.com/linensandhutch.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.style.display='none'">Linens &amp; Hutch</span>
+        <div class="code-box" onclick="copyCode('BRADS72')" style="font-size:0.68rem;">BRADS72</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
+          <img src="https://logo.clearbit.com/32degrees.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.style.display='none'">32 Degrees</span>
+        <div class="code-box" onclick="copyCode('BRAD24')" style="font-size:0.68rem;">BRAD24</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
+          <img src="https://logo.clearbit.com/hungryhowies.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.style.display='none'">Hungry Howie's</span>
+        <div class="code-box" onclick="copyCode('ANY99')" style="font-size:0.68rem;">ANY99</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALERT SIGNUP -->
+  <div style="background:var(--ink);border-radius:10px;padding:1.2rem;">
+    <div style="font-size:0.95rem;font-family:var(--serif);font-weight:700;color:white;margin-bottom:5px;">Get alerts before deals expire</div>
+    <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);margin-bottom:0.9rem;line-height:1.5;">Deals from Slickdeals, Hip2Save, Brad's, KCL & brand emails — straight to your inbox.</p>
+    <input type="email" placeholder="your@email.com" style="width:100%;padding:7px 11px;border-radius:5px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:white;font-family:var(--sans);font-size:0.8rem;margin-bottom:7px;outline:none;">
+    <button class="promo-btn" style="width:100%;text-align:center;">Notify Me Free →</button>
+  </div>
+
+</aside>
+</div><!-- end page-grid -->
+</div><!-- end container -->
+
+<footer>
+  <strong>Scoop</strong> — Deals aggregated from Slickdeals, Hip2Save, Brad's Deals, Krazy Coupon Lady, DealNews, brand email lists & the web.<br>
+  Codes verified before posting. Always confirm expiry before shopping. Not affiliated with any brand or deal site.<br><br>
+  <span>© 2026 Scoop. All rights reserved.</span>
+</footer>
+
+<div id="toast">✓ Code copied!</div>
+
+<script>
+function copyCode(c){
+  navigator.clipboard.writeText(c).catch(()=>{});
+  const t=document.getElementById('toast');
+  t.textContent='✓ '+c+' copied!';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+document.querySelectorAll('.filter-tab').forEach(b=>{
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.filter-tab').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+document.querySelectorAll('.cat-pill').forEach(b=>{
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.cat-pill').forEach(x=>x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
