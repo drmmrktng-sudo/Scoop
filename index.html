@@ -50,7 +50,7 @@ nav a:hover{color:white;}
 
 /* LAYOUT */
 .container{max-width:1280px;margin:0 auto;padding:0 2rem;}
-.page-grid{display:grid;grid-template-columns:1fr 310px;gap:2rem;padding:2rem 0 4rem;}
+.page-grid{display:grid;grid-template-columns:1fr;gap:2rem;padding:2rem 0 4rem;}
 
 /* SECTION LABELS */
 .section-label{display:flex;align-items:center;gap:10px;margin-bottom:1.1rem;}
@@ -77,12 +77,12 @@ nav a:hover{color:white;}
 .filter-tab.active{background:var(--ink);border-color:var(--ink);color:white;}
 
 /* DEALS GRID */
-.deals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.1rem;margin-bottom:2rem;}
+.deals-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem;margin-bottom:2rem;}
 .deal-card{background:white;border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:box-shadow 0.2s,transform 0.2s;cursor:pointer;display:flex;flex-direction:column;text-decoration:none;color:inherit;}
 .deal-card:hover{box-shadow:0 6px 28px rgba(0,0,0,0.09);transform:translateY(-2px);}
-.deal-card.featured{border:2px solid var(--brand);grid-column:span 2;flex-direction:row;}
+.deal-card.featured{border:2px solid var(--brand);grid-column:1/-1;flex-direction:row;}
 .deal-card-img{background:var(--surface-2);display:flex;align-items:center;justify-content:center;padding:1.25rem;min-height:110px;position:relative;}
-.deal-card.featured .deal-card-img{width:180px;flex-shrink:0;}
+.deal-card.featured .deal-card-img{width:220px;flex-shrink:0;}
 .deal-card-img img{max-width:130px;max-height:65px;width:auto;height:auto;object-fit:contain;}
 .deal-badge{position:absolute;top:8px;left:8px;font-size:0.62rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px;}
 .badge-hot{background:var(--brand);color:white;}
@@ -91,7 +91,7 @@ nav a:hover{color:white;}
 .badge-web{background:#534AB7;color:white;}
 .badge-free{background:#1D9E75;color:white;}
 
-.deal-card-body{padding:0.9rem 1rem 1rem;display:flex;flex-direction:column;flex:1;}
+.deal-card-body{padding:1rem 1.2rem 1.2rem;display:flex;flex-direction:column;flex:1;}
 .deal-source{font-size:0.75rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:5px;}
 .deal-title{font-family:var(--serif);font-size:1.1rem;font-weight:700;line-height:1.3;margin-bottom:6px;color:var(--ink);}.deal-title a{color:inherit;text-decoration:none;border-bottom:1px solid transparent;transition:border-color 0.15s;}.deal-title a:hover{border-bottom-color:var(--brand);}
 .deal-desc{font-size:0.92rem;color:var(--ink-soft);line-height:1.6;margin-bottom:10px;flex:1;}
@@ -809,7 +809,7 @@ footer strong{color:white;font-weight:500;}
 </main>
 
 <!-- SIDEBAR -->
-<aside>
+<aside style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;align-items:start;">
 
   <div class="sidebar-section">
     <h3>⏰ Expiring Soon</h3>
@@ -872,7 +872,7 @@ footer strong{color:white;font-weight:500;}
   </div>
 
   <!-- ALERT SIGNUP -->
-  <div id="alerts" style="background:var(--ink);border-radius:10px;padding:1.2rem;">
+  <div id="alerts" style="background:var(--ink);border-radius:10px;padding:1.2rem;grid-column:1/-1;">
     <div style="font-size:0.95rem;font-family:var(--serif);font-weight:700;color:white;margin-bottom:5px;">Get alerts before deals expire</div>
     <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);margin-bottom:0.9rem;line-height:1.5;">Deals from Top Pick, Top Pick, ,  & brand emails — straight to your inbox.</p>
     <input type="email" placeholder="your@email.com" style="width:100%;padding:7px 11px;border-radius:5px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:white;font-family:var(--sans);font-size:0.8rem;margin-bottom:7px;outline:none;">
