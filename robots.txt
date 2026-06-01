@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
+Disallow: /netlify/
 
 Sitemap: https://myscoopdeals.com/sitemap.xml
+
+# Allow major crawlers explicitly
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
