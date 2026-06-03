@@ -46,7 +46,7 @@ nav a:hover{color:white;}
 
 /* LAYOUT */
 .container{max-width:1280px;margin:0 auto;padding:0 2rem;}
-.page-grid{display:grid;grid-template-columns:1fr;gap:2rem;padding:2rem 0 4rem;}
+.page-grid{display:grid;grid-template-columns:1fr 300px;gap:2rem;padding:2rem 0 4rem;align-items:start;}
 
 /* SECTION LABELS */
 .section-label{display:flex;align-items:center;gap:10px;margin-bottom:1.1rem;}
@@ -189,9 +189,24 @@ nav a:hover{color:white;}
 footer{background:var(--ink);color:rgba(255,255,255,0.4);text-align:center;padding:1.75rem;font-size:0.75rem;line-height:1.9;}
 footer strong{color:white;font-weight:500;}
 
-@media(max-width:960px){.page-grid{grid-template-columns:1fr;}}
+@media(max-width:1024px){.page-grid{grid-template-columns:1fr 260px;}}@media(max-width:768px){.page-grid{grid-template-columns:1fr;}}
 @media(max-width:720px){.deal-card.featured{flex-direction:column;grid-column:span 1;}.deal-card.featured .deal-card-img{width:100%;}.deals-grid{grid-template-columns:1fr;}}
 @media(max-width:600px){nav a:not(.nav-cta):not(:last-child){display:none;}}
+
+/* ── SIDEBAR ── */
+.sidebar-widget{background:white;border:1px solid var(--border);border-radius:10px;padding:1.1rem;margin-bottom:1.1rem;}
+.sidebar-widget h3{font-family:var(--serif);font-size:0.95rem;font-weight:700;margin-bottom:0.85rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;}
+.sw-item{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border);gap:8px;}
+.sw-item:last-child{border-bottom:none;}
+.sw-brand{display:flex;align-items:center;gap:8px;}
+.sw-logo{width:28px;height:28px;border-radius:6px;background:var(--surface-2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;overflow:hidden;padding:2px;flex-shrink:0;}
+.sw-logo img{max-width:100%;max-height:100%;object-fit:contain;}
+.sw-name{font-size:0.8rem;font-weight:500;color:var(--ink);}
+.sw-code{font-family:var(--mono);font-size:0.7rem;font-weight:500;background:var(--surface-2);border:1px dashed var(--border-strong);border-radius:4px;padding:3px 8px;cursor:pointer;color:var(--ink);white-space:nowrap;transition:background 0.15s;}
+.sw-code:hover{background:var(--ink);color:white;}
+.sw-exp{font-size:0.68rem;color:var(--amber);font-weight:500;white-space:nowrap;}
+.sw-discount{font-size:0.75rem;font-weight:600;color:var(--brand);white-space:nowrap;}
+@media(max-width:1024px){.page-grid{grid-template-columns:1fr 260px;}}@media(max-width:768px){.page-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -525,74 +540,202 @@ footer strong{color:white;font-weight:500;}
 </main>
 
 <!-- SIDEBAR -->
-<aside style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;align-items:start;">
+<aside>
 
-  <div class="sidebar-section">
-    <h3>⏰ Expiring Soon</h3>
-    <div class="sidebar-deal">
-      <div class="sidebar-deal-logo"><img src="https://logo.clearbit.com/ulta.com" alt="Ulta" onerror="this.outerHTML='U'"></div>
-      <div class="sidebar-deal-info"><div class="name">Ulta 30% off — SUMMER30</div><div class="disc">Ends May 31 </div></div>
+  <!-- TOP ACTIVE CODES -->
+  <div class="sidebar-widget">
+    <h3>🏷️ Top Active Codes</h3>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/nulastin.com" alt="NULASTIN" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=nulastin.com';this.onerror=null;"></div>
+        <div class="sw-name">NULASTIN</div>
+      </div>
+      <div class="sw-code" onclick="copyCode('ICONS30')">ICONS30</div>
+      <div class="sw-discount">30% OFF</div>
     </div>
-    <div class="sidebar-deal">
-      <div class="sidebar-deal-logo"><img src="https://logo.clearbit.com/burgerfi.com" alt="BurgerFi" onerror="this.outerHTML='🍔'"></div>
-      <div class="sidebar-deal-info"><div class="name">BurgerFi $5.28 burger</div><div class="disc">Today only </div></div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/airdoctorpro.com" alt="AirDoctor" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=airdoctorpro.com';this.onerror=null;"></div>
+        <div class="sw-name">AirDoctor</div>
+      </div>
+      <div class="sw-code" onclick="copyCode('ADJUNE')">ADJUNE</div>
+      <div class="sw-discount">$250 OFF</div>
     </div>
-    <div class="sidebar-deal">
-      <div class="sidebar-deal-logo"><img src="https://logo.clearbit.com/chewy.com" alt="Chewy" onerror="this.outerHTML='C'"></div>
-      <div class="sidebar-deal-info"><div class="name">Chewy 35% off Autoship</div><div class="disc">Expires June 2 · Exclusive</div></div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/chewy.com" alt="Chewy" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=chewy.com';this.onerror=null;"></div>
+        <div class="sw-name">Chewy</div>
+      </div>
+      <div class="sw-code" onclick="copyCode('CHEWYWELCOME35')">CHEWYWELCOME35</div>
+      <div class="sw-discount">35% OFF</div>
     </div>
-    <div class="sidebar-deal">
-      <div class="sidebar-deal-logo"><img src="https://logo.clearbit.com/kohls.com" alt="Kohl's" onerror="this.outerHTML='K'"></div>
-      <div class="sidebar-deal-info"><div class="name">Kohl's 20% off — EXTRA20MAY</div><div class="disc">Expires June 3 · Exclusive</div></div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/bestbullysticks.com" alt="Best Bully Sticks" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=bestbullysticks.com';this.onerror=null;"></div>
+        <div class="sw-name">Best Bully Sticks</div>
+      </div>
+      <div class="sw-code" onclick="copyCode('BEACH')">BEACH</div>
+      <div class="sw-discount">30% OFF</div>
     </div>
-    <div class="sidebar-deal">
-      <div class="sidebar-deal-logo"><img src="https://logo.clearbit.com/lowes.com" alt="Lowe's" onerror="this.outerHTML='L'"></div>
-      <div class="sidebar-deal-info"><div class="name">Lowe's Memorial Day sale</div><div class="disc">Through June 3 · Top Pick</div></div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/ulta.com" alt="Ulta" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=ulta.com';this.onerror=null;"></div>
+        <div class="sw-name">Ulta Beauty</div>
+      </div>
+      <div class="sw-code" onclick="copyCode('SUMMER30')">SUMMER30</div>
+      <div class="sw-discount">30% OFF</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/lamaisonvalmont.com" alt="Valmont" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=lamaisonvalmont.com';this.onerror=null;"></div>
+        <div class="sw-name">La Maison Valmont</div>
+      </div>
+      <div class="sw-code" onclick="copyCode('EXCLUSIVE-OFFER-JUNE26')">EXCLUSIVE-OFFER-JUNE26</div>
+      <div class="sw-discount">30% OFF</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/penhaligons.com" alt="Penhaligon's" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=penhaligons.com';this.onerror=null;"></div>
+        <div class="sw-name">Penhaligon's</div>
+      </div>
+      <div class="sw-code" onclick="copyCode('SWAGGER')">SWAGGER</div>
+      <div class="sw-discount">2 Free Gifts</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/kohls.com" alt="Kohl's" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=kohls.com';this.onerror=null;"></div>
+        <div class="sw-name">Kohl's</div>
+      </div>
+      <div class="sw-code" onclick="copyCode('EXTRA20MAY')">EXTRA20MAY</div>
+      <div class="sw-discount">20% OFF</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/torraslife.com" alt="TORRAS" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=torraslife.com';this.onerror=null;"></div>
+        <div class="sw-name">TORRAS</div>
+      </div>
+      <div class="sw-code" onclick="copyCode('SUMMER10')">SUMMER10</div>
+      <div class="sw-discount">10% OFF</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/masterlock.com" alt="Master Lock" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=masterlock.com';this.onerror=null;"></div>
+        <div class="sw-name">Master Lock</div>
+      </div>
+      <div class="sw-code" onclick="copyCode('DEALNEWS10')">DEALNEWS10</div>
+      <div class="sw-discount">10% OFF</div>
+    </div>
+
+    <div style="margin-top:10px;text-align:center;">
+      <a href="codes.html" style="font-size:0.78rem;color:var(--brand);font-weight:500;">View all codes →</a>
     </div>
   </div>
 
-  <div class="sidebar-section">
-    <h3 id="codes">🏷️ Top Active Codes</h3>
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
-          <img src="https://logo.clearbit.com/ulta.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.src='https://www.google.com/s2/favicons?domain=ulta.com&sz=64';this.onerror=function(){this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\'font-family:var(--serif);font-weight:900;font-size:1rem;\'>U</span>')}">Ulta</span>
-        <div class="code-box" onclick="copyCode('SUMMER30')" style="font-size:0.68rem;">SUMMER30</div>
+  <!-- EXPIRING SOON -->
+  <div class="sidebar-widget">
+    <h3>⏰ Expiring Soon</h3>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/lifeisgood.com" alt="Life is Good" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=lifeisgood.com';this.onerror=null;"></div>
+        <div class="sw-name">Life is Good</div>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
-          <img src="https://logo.clearbit.com/chewy.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.src='https://www.google.com/s2/favicons?domain=chewy.com&sz=64';this.onerror=function(){this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\'font-family:var(--serif);font-weight:900;font-size:1rem;\'>C</span>')}">Chewy</span>
-        <div class="code-box" onclick="copyCode('CHEWYWELCOME35')" style="font-size:0.68rem;">CHEWYWELCOME35</div>
+      <div class="sw-exp">⏰ June 20</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/giftcards.com" alt="Giftcards.com" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=giftcards.com';this.onerror=null;"></div>
+        <div class="sw-name">Giftcards.com</div>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
-          <img src="https://logo.clearbit.com/kohls.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.src='https://www.google.com/s2/favicons?domain=kohls.com&sz=64';this.onerror=function(){this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\'font-family:var(--serif);font-weight:900;font-size:1rem;\'>K</span>')}">Kohl's</span>
-        <div class="code-box" onclick="copyCode('EXTRA20MAY')" style="font-size:0.68rem;">EXTRA20MAY</div>
+      <div class="sw-exp">⏰ June 14</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/loftie.com" alt="Loftie" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=byloftie.com';this.onerror=null;"></div>
+        <div class="sw-name">Loftie Father's Day</div>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
-          <img src="https://logo.clearbit.com/linensandhutch.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.src='https://www.google.com/s2/favicons?domain=linensandhutch.com&sz=64';this.onerror=function(){this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\'font-family:var(--serif);font-weight:900;font-size:1rem;\'>L</span>')}">Linens &amp; Hutch</span>
-        <div class="code-box" onclick="copyCode('BRADS72')" style="font-size:0.68rem;">BRADS72</div>
+      <div class="sw-exp">⏰ June 15</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/braun.com" alt="Braun DE" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=braun.com';this.onerror=null;"></div>
+        <div class="sw-name">Braun DE Summer Sale</div>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
-          <img src="https://logo.clearbit.com/32degrees.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.src='https://www.google.com/s2/favicons?domain=32degrees.com&sz=64';this.onerror=function(){this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\'font-family:var(--serif);font-weight:900;font-size:1rem;\'>3</span>')}">32 Degrees</span>
-        <div class="code-box" onclick="copyCode('BRAD24')" style="font-size:0.68rem;">BRAD24</div>
+      <div class="sw-exp">⏰ June 16</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/twillory.com" alt="Twillory" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=twillory.com';this.onerror=null;"></div>
+        <div class="sw-name">Twillory Blazers 20% off</div>
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:center;">
-        <span style="display:flex;align-items:center;gap:5px;font-size:0.78rem;color:var(--ink-soft);">
-          <img src="https://logo.clearbit.com/hungryhowies.com" alt="" style="width:16px;height:16px;object-fit:contain;border-radius:3px;" onerror="this.src='https://www.google.com/s2/favicons?domain=hungryhowies.com&sz=64';this.onerror=function(){this.style.display='none';this.insertAdjacentHTML('afterend','<span style=\'font-family:var(--serif);font-weight:900;font-size:1rem;\'>H</span>')}">Hungry Howie's</span>
-        <div class="code-box" onclick="copyCode('ANY99')" style="font-size:0.68rem;">ANY99</div>
+      <div class="sw-exp">⏰ June 7</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/glassesdirect.co.uk" alt="Glasses Direct" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=glassesdirect.co.uk';this.onerror=null;"></div>
+        <div class="sw-name">Glasses Direct 50% off</div>
       </div>
+      <div class="sw-exp">⏰ June 7</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/azzhoteles.com" alt="Azz Hoteles" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=azzhoteles.com';this.onerror=null;"></div>
+        <div class="sw-name">Azz Hoteles (ESCAPAAZZ30)</div>
+      </div>
+      <div class="sw-exp">⏰ June 30</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/excellenceresorts.com" alt="Excellence" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=excellenceresorts.com';this.onerror=null;"></div>
+        <div class="sw-name">Excellence Collection</div>
+      </div>
+      <div class="sw-exp">⏰ June 30</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/nulastin.com" alt="NULASTIN" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=nulastin.com';this.onerror=null;"></div>
+        <div class="sw-name">NULASTIN Hotter Than Prime</div>
+      </div>
+      <div class="sw-exp">⚡ June 27-30</div>
+    </div>
+
+    <div class="sw-item">
+      <div class="sw-brand">
+        <div class="sw-logo"><img src="https://logo.clearbit.com/empiretoday.com" alt="Empire Today" onerror="this.src='https://www.google.com/s2/favicons?sz=64&domain=empiretoday.com';this.onerror=null;"></div>
+        <div class="sw-name">Empire Today 60% off</div>
+      </div>
+      <div class="sw-exp">⏰ June 29</div>
+    </div>
+
+    <div style="margin-top:10px;text-align:center;">
+      <a href="all-deals.html" style="font-size:0.78rem;color:var(--brand);font-weight:500;">View all deals →</a>
     </div>
   </div>
 
   <!-- ALERT SIGNUP -->
-  <div id="alerts" style="background:var(--ink);border-radius:10px;padding:1.2rem;grid-column:1/-1;">
+  <div style="background:var(--ink);border-radius:10px;padding:1.2rem;" id="alerts">
     <div style="font-size:0.95rem;font-family:var(--serif);font-weight:700;color:white;margin-bottom:5px;">Get alerts before deals expire</div>
-    <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);margin-bottom:0.9rem;line-height:1.5;">Deals from Top Pick, Top Pick, ,  & brand emails — straight to your inbox.</p>
+    <p style="font-size:0.75rem;color:rgba(255,255,255,0.45);margin-bottom:0.9rem;line-height:1.5;">Daily deals, codes & freebies — straight to your inbox.</p>
     <input type="email" placeholder="your@email.com" style="width:100%;padding:7px 11px;border-radius:5px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.06);color:white;font-family:var(--sans);font-size:0.8rem;margin-bottom:7px;outline:none;">
-    <button class="promo-btn" style="width:100%;text-align:center;">Notify Me Free →</button>
+    <button style="width:100%;text-align:center;background:var(--brand);color:white;border:none;padding:9px 18px;border-radius:6px;font-family:var(--sans);font-size:0.82rem;font-weight:500;cursor:pointer;">Get Free Alerts →</button>
   </div>
 
 </aside>
