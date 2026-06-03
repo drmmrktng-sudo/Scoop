@@ -1,0 +1,26 @@
+name: Daily Deal Update
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+jobs:
+  update-deals:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Run updater
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node update-deals-action.mjs
+      - name: Commit changes
+        run: |
+          git config user.name "Scoop Deals Bot"
+          git config user.email "bot@myscoopdeals.com"
+          git add index.html
+          git diff --staged --quiet || git commit -m "Daily deals $(date +%Y-%m-%d)"
+          git push
