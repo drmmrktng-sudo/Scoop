@@ -10,14 +10,16 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-      - name: Run updater
+      - name: Run Python deal updater
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: node update-deals-action.mjs
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Python version: $(python3 --version)"
+          echo "API key set: $([[ -n "$ANTHROPIC_API_KEY" ]] && echo YES || echo NO)"
+          python3 update-deals-action.py
       - name: Commit changes
+        if: success()
         run: |
           git config user.name "Scoop Deals Bot"
           git config user.email "bot@myscoopdeals.com"
